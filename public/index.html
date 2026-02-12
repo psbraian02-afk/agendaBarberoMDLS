@@ -3,106 +3,89 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Richard Barber | Estilo Profesional</title>
-    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;700&family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+    <title>Richard Barber | Exclusive Cuts</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            /* Nueva Paleta: Blanco y Gris */
-            --primary: #1a1a1a;       /* Negro suave para textos principales */
-            --accent: #4a4a4a;        /* Gris oscuro para detalles */
-            --bg-body: #ffffff;       /* Fondo blanco puro */
-            --bg-secondary: #f4f4f4;  /* Gris muy claro para secciones */
-            --surface: #ffffff;       /* Tarjetas blancas */
-            --border: #e0e0e0;        /* Bordes sutiles */
-            --shadow: 0 10px 30px rgba(0,0,0,0.08); /* Sombra moderna */
-            --transition: all 0.4s ease;
+            /* PALETA MONOCROMÁTICA DE LUJO */
+            --bg-body: #f8f9fa;        /* Gris casi blanco */
+            --text-main: #111111;      /* Negro Carbón */
+            --text-light: #555555;     /* Gris Humo */
+            --accent: #000000;         /* Acento Negro Puro */
+            --border: rgba(0,0,0,0.08);
+            --card-bg: #ffffff;
+            --shadow-soft: 0 10px 40px -10px rgba(0,0,0,0.08);
+            --transition: all 0.5s cubic-bezier(0.25, 1, 0.5, 1);
         }
 
-        /* --- RESET & BASE --- */
+        /* --- RESET --- */
         * { margin: 0; padding: 0; box-sizing: border-box; outline: none; -webkit-tap-highlight-color: transparent; }
-        html { scroll-behavior: smooth; font-size: 16px; } /* Aumenté base font para mejor lectura en móvil */
+        html { scroll-behavior: smooth; font-size: 16px; }
 
         body {
-            font-family: 'Roboto', sans-serif;
+            font-family: 'Montserrat', sans-serif;
             background: var(--bg-body);
-            color: var(--primary);
-            line-height: 1.6;
+            color: var(--text-main);
+            line-height: 1.7;
             overflow-x: hidden;
             position: relative;
         }
 
-        /* --- CANVAS DE PARTÍCULAS --- */
+        /* --- PARTICULAS INTENSAS --- */
         #particles-js {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
             z-index: 0;
-            opacity: 0.6;
-            pointer-events: none;
+            background: #ffffff; /* Fondo base blanco */
         }
 
-        /* --- NAVBAR (Minimalista) --- */
+        /* --- NAVBAR --- */
         .navbar {
             position: fixed;
             top: 0; width: 100%;
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(20px);
             border-bottom: 1px solid var(--border);
             padding: 15px 0;
             z-index: 1000;
             display: flex;
             flex-direction: column;
             align-items: center;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            transition: var(--transition);
         }
 
         .brand-logo {
-            font-family: 'Oswald', sans-serif;
-            color: var(--primary);
+            font-family: 'Playfair Display', serif;
+            color: var(--text-main);
             font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            font-size: 1.4rem;
-            margin-bottom: 5px;
-            border: 2px solid var(--primary);
-            padding: 2px 10px;
+            font-size: 1.5rem;
+            letter-spacing: -0.5px;
         }
 
         .nav-links {
             display: flex;
             justify-content: center;
             gap: 20px;
-            width: 100%;
-            overflow-x: auto;
-            padding: 8px 10px 0;
-            scrollbar-width: none;
+            margin-top: 5px;
         }
-        
-        .nav-links::-webkit-scrollbar { display: none; }
 
         .nav-item {
-            color: var(--accent);
+            color: var(--text-light);
             text-decoration: none;
-            font-size: 0.75rem;
+            font-size: 0.7rem;
             text-transform: uppercase;
-            font-weight: 500;
+            font-weight: 600;
             letter-spacing: 1px;
             transition: var(--transition);
             position: relative;
         }
 
         .nav-item::after {
-            content: '';
-            position: absolute;
-            width: 0;
-            height: 2px;
-            bottom: -4px;
-            left: 0;
-            background-color: var(--primary);
-            transition: var(--transition);
+            content: ''; position: absolute; bottom: -2px; left: 50%; width: 0; height: 1px;
+            background: var(--text-main); transition: var(--transition); transform: translateX(-50%);
         }
-
+        .nav-item:hover { color: var(--text-main); }
         .nav-item:hover::after { width: 100%; }
-        .nav-item:hover { color: var(--primary); }
 
         /* --- HERO SECTION --- */
         .main-menu {
@@ -112,239 +95,175 @@
             justify-content: center;
             align-items: center;
             text-align: center;
-            padding: 100px 20px 60px;
+            padding: 120px 20px 80px;
             position: relative;
             z-index: 1;
-            background: linear-gradient(to bottom, #ffffff 0%, #f4f4f4 100%);
         }
 
         .logo-container {
-            width: 120px;
-            height: 120px;
-            margin-bottom: 25px;
+            width: 140px;
+            height: 140px;
+            margin-bottom: 30px;
             border-radius: 50%;
             background: #fff;
-            box-shadow: var(--shadow);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            overflow: hidden;
+            padding: 5px;
+            box-shadow: var(--shadow-soft);
             border: 1px solid var(--border);
         }
-
+        
         .logo-container img {
-            width: 80%;
-            filter: grayscale(100%); /* Hace el logo blanco y negro */
+            width: 100%; height: 100%; 
+            object-fit: cover; 
+            border-radius: 50%;
+            filter: grayscale(100%) contrast(1.2); /* Efecto B&N elegante */
         }
 
         h1 {
-            font-family: 'Oswald', sans-serif;
-            font-size: 3rem;
-            line-height: 1;
-            letter-spacing: 2px;
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2.5rem, 8vw, 4rem);
+            color: var(--text-main);
+            line-height: 1.1;
             margin-bottom: 10px;
-            color: var(--primary);
-            text-transform: uppercase;
+            letter-spacing: -1px;
         }
 
         .subtitle {
-            font-size: 0.9rem;
+            font-size: 0.85rem;
             text-transform: uppercase;
-            letter-spacing: 4px;
-            color: var(--accent);
+            letter-spacing: 3px;
+            color: var(--text-light);
             margin-bottom: 40px;
-            font-weight: 400;
-            border-bottom: 2px solid var(--primary);
-            padding-bottom: 5px;
-            display: inline-block;
+            font-weight: 500;
+            border-top: 1px solid #ddd;
+            border-bottom: 1px solid #ddd;
+            padding: 8px 20px;
+            background: rgba(255,255,255,0.8);
         }
 
-        /* --- BOTONES (Estilo Bloque Moderno) --- */
+        /* --- BOTONES MINIMALISTAS --- */
         .btn-container {
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-            width: 100%;
-            max-width: 300px;
+            display: flex; flex-direction: column; gap: 15px; width: 100%; max-width: 280px;
         }
 
         .btn {
-            background: var(--primary);
+            background: var(--text-main);
             color: #fff;
-            border: none;
+            border: 1px solid var(--text-main);
             padding: 18px 0;
-            font-size: 0.85rem;
-            font-weight: 700;
-            font-family: 'Oswald', sans-serif;
+            font-size: 0.8rem;
+            font-weight: 600;
             text-transform: uppercase;
             letter-spacing: 2px;
             cursor: pointer;
             transition: var(--transition);
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
         }
 
         .btn:hover {
-            background: #000;
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+            background: transparent;
+            color: var(--text-main);
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
         }
 
-        .btn-registro { 
-            background: transparent; 
-            border: 2px solid var(--primary); 
-            color: var(--primary); 
-            box-shadow: none;
+        .btn-registro {
+            background: transparent;
+            color: var(--text-main);
+            border: 1px solid #ccc;
         }
-        
-        .btn-registro:hover {
-            background: var(--primary);
-            color: #fff;
-        }
+        .btn-registro:hover { border-color: var(--text-main); }
 
-        /* --- SECCIONES --- */
+        /* --- SECCIONES TIPO TARJETA --- */
         section {
-            max-width: 600px;
-            margin: 0 auto;
-            padding: 80px 20px;
+            max-width: 650px;
+            margin: 40px auto;
+            padding: 60px 30px;
+            background: var(--card-bg);
+            box-shadow: var(--shadow-soft);
             text-align: center;
             position: relative;
             z-index: 1;
-        }
-
-        section:nth-child(even) {
-            background-color: var(--bg-secondary); /* Fondo alternado gris claro */
-            width: 100%;
-            max-width: 100%;
-        }
-        
-        /* Contenedor interno para secciones con fondo completo */
-        section:nth-child(even) > div, 
-        section:nth-child(even) > h2,
-        section:nth-child(even) > p {
-            max-width: 600px;
-            margin-left: auto;
-            margin-right: auto;
+            border: 1px solid var(--border);
         }
 
         h2 {
-            font-family: 'Oswald', sans-serif;
+            font-family: 'Playfair Display', serif;
             font-size: 2rem;
-            letter-spacing: 1px;
             margin-bottom: 30px;
-            color: var(--primary);
-            text-transform: uppercase;
+            color: var(--text-main);
             position: relative;
             display: inline-block;
         }
-
-        /* Detalle decorativo debajo del título */
+        
+        /* Pequeño detalle decorativo bajo el título */
         h2::after {
-            content: '';
-            display: block;
-            width: 40px;
-            height: 3px;
-            background: var(--primary);
-            margin: 10px auto 0;
+            content: ''; display: block; width: 40px; height: 2px; 
+            background: var(--text-main); margin: 15px auto 0;
         }
 
         .text-content {
             font-size: 1.1rem;
-            color: var(--accent);
-            font-weight: 300;
+            color: var(--text-light);
+            font-style: italic;
         }
 
-        /* --- TABLA DE HORARIOS (Estilo Clean) --- */
-        .info-box {
-            background: var(--surface);
-            padding: 0;
-            border-radius: 8px;
-            box-shadow: var(--shadow);
-            overflow: hidden;
-            border: 1px solid var(--border);
-        }
-
+        /* --- HORARIOS --- */
         .horarios-list li {
-            padding: 15px 20px;
+            padding: 15px 0;
             display: flex;
             justify-content: space-between;
+            border-bottom: 1px solid #eee;
+            color: var(--text-light);
             font-size: 0.85rem;
-            font-weight: 500;
-            color: var(--primary);
-            border-bottom: 1px solid #f0f0f0;
         }
+        .horarios-list li span:first-child { font-weight: 700; color: var(--text-main); }
+        .horarios-list li:last-child { border: none; }
 
-        .horarios-list li:last-child { border-bottom: none; }
-        .horarios-list li span:first-child { font-weight: 700; color: var(--primary); }
-        .horarios-list li span:last-child { color: var(--accent); }
-
-        /* --- BOTÓN UBICACIÓN --- */
+        /* --- UBICACION --- */
         .location-btn-large {
-            display: block;
-            width: 100%;
-            max-width: 300px;
-            margin: 20px auto;
-            padding: 20px;
-            background: #fff;
-            border: 2px solid var(--primary);
-            color: var(--primary);
-            text-decoration: none;
-            font-family: 'Oswald', sans-serif;
-            font-size: 1rem;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            font-weight: 700;
-            transition: var(--transition);
+            display: block; width: 100%; padding: 20px;
+            background: #fff; border: 1px solid var(--text-main);
+            color: var(--text-main); text-decoration: none;
+            font-family: 'Montserrat', sans-serif; font-weight: 700;
+            letter-spacing: 1px; text-transform: uppercase;
+            transition: var(--transition); margin-top: 20px;
         }
-
-        .location-btn-large:hover {
-            background: var(--primary);
-            color: #fff;
-        }
+        .location-btn-large:hover { background: var(--text-main); color: #fff; }
 
         .address-text {
             margin-top: 30px;
-            font-size: 0.85rem;
-            color: var(--accent);
-            background: var(--bg-secondary);
+            font-size: 0.8rem;
+            color: var(--text-light);
+            background: #f4f4f4;
             padding: 20px;
-            border-left: 4px solid var(--primary);
-            text-align: left;
         }
 
-        /* --- FLOATING BTN --- */
+        /* --- FLOAT BUTTON --- */
         .btn-floating {
-            position: fixed;
-            bottom: 25px; right: 25px;
-            width: 55px; height: 55px;
-            background: var(--primary);
+            position: fixed; bottom: 30px; right: 30px;
+            width: 60px; height: 60px;
+            background: var(--text-main);
             border-radius: 50%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
+            display: flex; justify-content: center; align-items: center;
             z-index: 2000;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
             transition: var(--transition);
-            transform: translateY(100px);
-            opacity: 0;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.3);
+            transform: translateY(100px); opacity: 0;
         }
-
         .btn-floating.visible { transform: translateY(0); opacity: 1; }
-        .btn-floating svg { width: 24px; height: 24px; fill: #fff; }
-        .btn-floating:hover { transform: scale(1.1); }
+        .btn-floating svg { fill: #fff; width: 24px; }
 
         footer {
-            background: var(--primary);
-            padding: 40px 20px;
+            padding: 50px 20px;
             text-align: center;
             font-size: 0.7rem;
-            letter-spacing: 2px;
-            color: #aaa;
-            text-transform: uppercase;
+            color: #999;
+            background: #fff;
+            border-top: 1px solid var(--border);
+            position: relative; z-index: 2;
         }
-        
-        footer span { color: #fff; font-weight: 700; }
 
-        .reveal { opacity: 0; transform: translateY(30px); transition: 0.8s ease-out; }
+        /* Animaciones */
+        .reveal { opacity: 0; transform: translateY(40px); transition: 1s ease; }
         .reveal.active { opacity: 1; transform: translateY(0); }
     </style>
 </head>
@@ -355,10 +274,10 @@
     <nav class="navbar">
         <div class="brand-logo">RICHARD</div>
         <div class="nav-links">
-            <a href="#inicio" class="nav-item">Agenda</a>
-            <a href="#sobre-mi" class="nav-item">El Barbero</a>
+            <a href="#inicio" class="nav-item">Reserva</a>
+            <a href="#sobre-mi" class="nav-item">Studio</a>
             <a href="#horarios" class="nav-item">Horarios</a>
-            <a href="#ubicacion" class="nav-item">Local</a>
+            <a href="#ubicacion" class="nav-item">Mapa</a>
         </div>
     </nav>
 
@@ -368,82 +287,103 @@
 
     <div class="main-menu" id="inicio">
         <div class="logo-container reveal active">
-            <img src="logo.png" alt="Richard Barber" onerror="this.src='https://cdn-icons-png.flaticon.com/512/46/46166.png'">
+            <img src="logo.png" alt="Richard Logo" onerror="this.src='https://cdn-icons-png.flaticon.com/512/10972/10972236.png'">
         </div>
-        <h1 class="reveal active">Richard Barber</h1>
-        <div class="subtitle reveal active">Cortes Clásicos & Modernos</div>
+        
+        <h1 class="reveal active">RICHARD<br>BARBER</h1>
+        <div class="subtitle reveal active">Estética Masculina Premium</div>
         
         <div class="btn-container reveal active">
-            <button id="mainBookingBtn" class="btn" onclick="verificarYAgendar()">Reservar Turno</button>
+            <button id="mainBookingBtn" class="btn" onclick="verificarYAgendar()">Reservar Cita</button>
             <button class="btn btn-registro" onclick="window.location.href='registro.html'">Área Clientes</button>
         </div>
     </div>
 
     <section id="sobre-mi" class="reveal">
-        <h2>El Barbero</h2>
-        <p class="text-content">"Más de 15 años perfeccionando el arte del corte masculino. Experiencia, precisión y buen ambiente."</p>
+        <h2>Experiencia</h2>
+        <p class="text-content">"Más de 15 años definiendo el estilo clásico y moderno. Un servicio de barbería donde la precisión y el detalle son la única norma."</p>
     </section>
 
     <section id="horarios" class="reveal">
-        <h2>Horarios de Atención</h2>
-        <div class="info-box">
-            <ul class="horarios-list" style="list-style: none;">
-                <li><span>LUNES</span> <span>09:00 — 21:00</span></li>
-                <li><span>MARTES</span> <span>09:00 — 21:00</span></li>
-                <li><span>MIÉRCOLES</span> <span>09:00 — 21:00</span></li>
-                <li><span>JUEVES</span> <span>09:00 — 21:00</span></li>
-                <li><span>VIERNES</span> <span>09:00 — 21:00</span></li>
-                <li><span>SÁBADO</span> <span>09:00 — 21:00</span></li>
-                <li style="background: #fcfcfc;"><span>DOMINGO</span> <span style="color: #d32f2f; font-weight: bold;">CERRADO</span></li>
-            </ul>
-        </div>
+        <h2>Disponibilidad</h2>
+        <ul class="horarios-list" style="list-style: none;">
+            <li><span>LUNES</span> <span>09:00 — 21:00</span></li>
+            <li><span>MARTES</span> <span>09:00 — 21:00</span></li>
+            <li><span>MIÉRCOLES</span> <span>09:00 — 21:00</span></li>
+            <li><span>JUEVES</span> <span>09:00 — 21:00</span></li>
+            <li><span>VIERNES</span> <span>09:00 — 21:00</span></li>
+            <li><span>SÁBADO</span> <span>09:00 — 21:00</span></li>
+            <li style="opacity: 0.5;"><span>DOMINGO</span> <span>Cerrado</span></li>
+        </ul>
     </section>
 
     <section id="ubicacion" class="reveal">
         <h2>Ubicación</h2>
-        <p style="color: var(--accent); font-weight: 700; letter-spacing: 2px; margin-bottom: 20px;">ARTIGAS, URUGUAY</p>
+        <p style="color: var(--text-light); margin-bottom: 20px;">ARTIGAS, URUGUAY</p>
         
-        <a href="https://www.google.com/maps/search/?api=1&query=Richard+Tattoo+Artigas+HGFM%2B9H8" target="_blank" class="location-btn-large">
-            Abrir en Google Maps
-        </a>
-
         <div class="address-text">
-            <p style="margin-bottom: 5px;"><strong>DIRECCIÓN:</strong></p>
-            <p>HGFM+9H8 Richard Barber Shop, C. 2</p>
+            <p><strong>RICHARD BARBER SHOP</strong></p>
+            <p>C. 2, HGFM+9H8</p>
             <p>55000 Artigas, Departamento de Artigas</p>
         </div>
+
+        <a href="https://www.google.com/maps/search/?api=1&query=Richard+Tattoo+Artigas+HGFM%2B9H8" target="_blank" class="location-btn-large">
+            Ver en Mapa
+        </a>
     </section>
 
     <footer>
-        © 2026 <span>RICHARD BARBER</span> | BRP | Braian Pereira <br>ESTILO & CALIDAD
+        © 2026 RICHARD BARBER SHOP <br>
+        <span style="font-weight: 700; color: #000;">BRAIAN PEREIRA</span>
     </footer>
 
     <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
     <script>
-        // Configuración de partículas MODIFICADA para fondo blanco (Partículas grises)
+        // CONFIGURACIÓN INTENSA DE PARTÍCULAS (Gris sobre Blanco)
         particlesJS("particles-js", {
             "particles": {
-                "number": { "value": 80, "density": { "enable": true, "value_area": 800 } },
-                "color": { "value": "#333333" }, /* Color Gris Oscuro */
-                "shape": { "type": "circle" }, // Puedes cambiar a "edge" para cuadrados
-                "opacity": { "value": 0.4, "random": true },
+                "number": { 
+                    "value": 100, // Cantidad INTENSA
+                    "density": { "enable": true, "value_area": 800 } 
+                },
+                "color": { "value": "#222222" }, // Color casi negro
+                "shape": { "type": "circle" },
+                "opacity": { 
+                    "value": 0.5, // Visibles pero elegantes
+                    "random": false 
+                },
                 "size": { "value": 3, "random": true },
                 "line_linked": { 
-                    "enable": true, 
+                    "enable": true, // CONEXIONES ACTIVADAS (Red)
                     "distance": 150, 
-                    "color": "#333333", 
-                    "opacity": 0.1, 
+                    "color": "#999999", 
+                    "opacity": 0.4, 
                     "width": 1 
                 },
-                "move": { "enable": true, "speed": 2, "direction": "none", "random": false, "out_mode": "out" }
+                "move": { 
+                    "enable": true, 
+                    "speed": 2, 
+                    "direction": "none", 
+                    "random": false, 
+                    "out_mode": "out" 
+                }
             },
-            "interactivity": { "events": { "onhover": { "enable": false } } },
+            "interactivity": {
+                "detect_on": "canvas",
+                "events": {
+                    "onhover": { "enable": true, "mode": "grab" }, // Efecto al pasar el mouse/dedo
+                    "onclick": { "enable": true, "mode": "push" }
+                },
+                "modes": {
+                    "grab": { "distance": 140, "line_linked": { "opacity": 1 } }
+                }
+            },
             "retina_detect": true
         });
 
-        // Lógica original mantenida intacta
+        // Funciones originales intactas
         function verificarYAgendar() {
-            const clienteGuardado = localStorage.getItem('clienteRichardTattoo'); // Mantengo la misma key para no perder datos viejos si los hay
+            const clienteGuardado = localStorage.getItem('clienteRichardTattoo');
             if (clienteGuardado) { 
                 window.location.href = 'agenda.html'; 
             } else { 
@@ -454,6 +394,8 @@
 
         const mainBtn = document.getElementById('mainBookingBtn');
         const floatingBtn = document.getElementById('floatingBtn');
+        
+        // Observer para botón flotante
         const buttonObserver = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (!entry.isIntersecting) floatingBtn.classList.add('visible');
@@ -462,6 +404,7 @@
         }, { threshold: 0 });
         if(mainBtn) buttonObserver.observe(mainBtn);
 
+        // Observer para animaciones al hacer scroll
         const revealObserver = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) entry.target.classList.add('active');
