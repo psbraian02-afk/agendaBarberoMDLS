@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agendar Turno | RichardTattoo</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700&family=Playfair+Display:ital,wght@0,400;1,700&display=swap" rel="stylesheet">
+    <style>
+        /* Configuración de Lujo Alineada */
+        :root {
+            --gold: #f1c40f;
+            --gold-soft: rgba(241, 196, 15, 0.1);
+            --bg: #0a0a0a;
+            --card: #141414;
+            --text-main: #ffffff;
+            --text-dim: #a0a0a0;
+            --transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        body {
+            margin: 0;
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg);
+            background-image: radial-gradient(circle at center, #111 0%, #0a0a0a 100%);
+            color: var(--text-main);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            overflow: hidden; 
+        }
+
+        .container {
+            background-color: var(--card);
+            padding: 40px 25px;
+            border-radius: 2px; /* Bordes rectos elegantes */
+            width: 90%;
+            max-width: 480px;
+            text-align: center;
+            box-shadow: 0 30px 60px rgba(0,0,0,0.8);
+            border: 1px solid rgba(241, 196, 15, 0.1);
+            position: relative;
+        }
+
+        h2 { 
+            font-family: 'Playfair Display', serif;
+            color: var(--gold); 
+            text-transform: uppercase; 
+            font-size: 1.6rem; 
+            margin-bottom: 30px; 
+            letter-spacing: 4px;
+            font-weight: 400;
+        }
+
+        /* --- PASOS Y ANIMACIONES --- */
+        .step { display: none; }
+        .step.active { display: block; animation: fadeInUp 0.7s ease-out; }
+
+        @keyframes fadeInUp { 
+            from { opacity: 0; transform: translateY(20px); } 
+            to { opacity: 1; transform: translateY(0); } 
+        }
+
+        /* --- GRIDS Y SCROLLS --- */
+        .grid-casillas {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 12px;
+            margin-bottom: 25px;
+        }
+
+        .grid-tamanos {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            margin-bottom: 20px;
+            max-height: 400px; 
+            overflow-y: auto;
+            padding: 10px;
+        }
+
+        /* Estilo para el scroll de tamaños */
+        .grid-tamanos::-webkit-scrollbar { width: 3px; }
+        .grid-tamanos::-webkit-scrollbar-thumb { background: var(--gold); }
+
+        .scroll-x {
+            display: flex;
+            overflow-x: auto;
+            gap: 12px;
+            padding: 20px 10px;
+            margin-bottom: 25px;
+            scroll-snap-type: x mandatory;
+            scrollbar-width: none; 
+        }
+
+        .scroll-x::-webkit-scrollbar { display: none; }
+
+        /* --- CASILLAS PREMIUM --- */
+        .casilla {
+            background: #0d0d0d;
+            border: 1px solid #222;
+            color: var(--text-dim);
+            padding: 18px 10px;
+            border-radius: 2px;
+            cursor: pointer;
+            transition: var(--transition);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-width: 70px; 
+            scroll-snap-align: center;
+            flex-shrink: 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .casilla-tamano { height: auto; padding: 15px; background: #111; border-color: #222; }
+        
+        .casilla-tamano img {
+            width: 100%;
+            height: 90px;
+            object-fit: cover;
+            margin-bottom: 12px;
+            filter: grayscale(1) contrast(1.2);
+            transition: var(--transition);
+            border: 1px solid rgba(255,255,255,0.05);
+        }
+
+        .casilla span { font-size: 0.8rem; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; }
+        .casilla small { font-size: 0.65rem; color: var(--gold); margin-top: 6px; font-weight: 400; opacity: 0.8; }
+
+        .casilla:hover, .casilla.selected {
+            border-color: var(--gold);
+            color: var(--text-main);
+            background: var(--gold-soft);
+            transform: translateY(-3px);
+        }
+
+        .casilla:hover img, .casilla.selected img { filter: grayscale(0) contrast(1); border-color: var(--gold); }
+
+        .casilla.ocupado {
+            background: #080808;
+            border-color: #151515;
+            color: #333;
+            cursor: not-allowed;
+            pointer-events: none;
+            opacity: 0.4;
+        }
+
+        /* --- BOTONES --- */
+        .btn-back {
+            background: none;
+            border: 1px solid #333;
+            color: #888;
+            padding: 12px 25px;
+            border-radius: 2px;
+            cursor: pointer;
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            transition: var(--transition);
+            margin-top: 15px;
+            font-weight: 600;
+        }
+
+        .btn-back:hover {
+            border-color: var(--gold);
+            color: var(--gold);
+            background: rgba(255,255,255,0.02);
+        }
+
+        #info-duracion {
+            font-size: 0.75rem;
+            color: var(--gold);
+            letter-spacing: 2px;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            font-weight: 700;
+        }
+
+        #loading-msg { 
+            color: var(--gold); 
+            font-size: 0.8rem; 
+            display: none; 
+            margin-bottom: 15px; 
+            font-style: italic; 
+            letter-spacing: 1px;
+        }
+
+        /* Efecto de brillo al pasar el mouse por la tarjeta */
+        .container::after {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; height: 1px;
+            background: linear-gradient(90deg, transparent, var(--gold), transparent);
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div id="paso1" class="step active">
+        <h2>Seleccionar Mes</h2>
+        <div class="grid-casillas" id="contenedor-meses"></div>
+        <button class="btn-back" onclick="window.location.href='index.html'">← Volver al Inicio</button>
+    </div>
+
+    <div id="paso2" class="step">
+        <h2>Seleccionar Día</h2>
+        <div class="scroll-x" id="contenedor-dias"></div>
+        <button class="btn-back" onclick="irAlPaso(1)">← Cambiar Mes</button>
+    </div>
+
+    <div id="paso3" class="step">
+        <h2>Dimensiones</h2>
+        <div class="grid-tamanos">
+            <div class="casilla casilla-tamano" onclick="seleccionarTamano('Muy Pequeño', 1)">
+                <img src="https://i.postimg.cc/Fzr1VjcV/muy-pequeno.jpg" alt="Muy Pequeño">
+                <span>Micro</span>
+                <small>Hasta 3 cm</small>
+            </div>
+
+            <div class="casilla casilla-tamano" onclick="seleccionarTamano('Pequeño', 1)">
+                <img src="https://i.postimg.cc/jD3yYZz7/muy-pequeno.jpg" alt="Pequeño">
+                <span>Pequeño</span>
+                <small>Hasta 7 cm</small>
+            </div>
+
+            <div class="casilla casilla-tamano" onclick="seleccionarTamano('Mediano', 2)">
+                <img src="https://i.postimg.cc/NKCRvp1X/mediano.jpg" alt="Mediano">
+                <span>Mediano</span>
+                <small>Hasta 15 cm</small>
+            </div>
+
+            <div class="casilla casilla-tamano" onclick="seleccionarTamano('Grande', 3)">
+                <img src="https://i.postimg.cc/219nN24q/grande.jpg" alt="Grande">
+                <span>Grande</span>
+                <small>Hasta 25 cm</small>
+            </div>
+
+            <div class="casilla casilla-tamano" onclick="seleccionarTamano('Extra Grande', 4)">
+                <img src="https://i.postimg.cc/90CwN33J/d34e5975c3f04e63a247b09b10e5106a.jpg" alt="Extra Grande">
+                <span>Coleccionista</span>
+                <small>Manga / Muslo</small>
+            </div>
+
+            <div class="casilla casilla-tamano" onclick="seleccionarTamano('Espalda Completa', 6)">
+                <img src="https://i.postimg.cc/ZWbLSW2X/images-(1).jpg" alt="Espalda">
+                <span>Obra Maestra</span>
+                <small>Pieza Completa</small>
+            </div>
+        </div>
+        <button class="btn-back" onclick="irAlPaso(2)">← Volver al Calendario</button>
+    </div>
+
+    <div id="paso4" class="step">
+        <h2>Horario Disponible</h2>
+        <p id="info-duracion"></p>
+        <div id="loading-msg">Consultando agenda privada...</div>
+        <div class="grid-casillas" id="contenedor-horas" style="max-height: 280px; overflow-y: auto; padding: 5px;"></div>
+        <button class="btn-back" onclick="irAlPaso(3)">← Cambiar Tamaño</button>
+    </div>
+</div>
+
+<script>
+    const API_KEY = "AIzaSyDtvXJZoFbMj4RqG8unjdrIGWe42rQt7D0";
+    const CALENDAR_ID = "8d5ca516b382550257115f17093db6ae208b723a1c13064952c761809022d404@group.calendar.google.com";
+
+    let mesSel, diaSel, tamanoSel, duracionSel;
+    const mesesNombres = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"];
+    const mesesCortos = ["Ene", "Feb", "Mar", "Abr", "May", "Jun", "Jul", "Ago", "Sep", "Oct", "Nov", "Dic"];
+    
+    const scrollContainer = document.getElementById("contenedor-dias");
+    scrollContainer.addEventListener("wheel", (evt) => {
+        evt.preventDefault();
+        scrollContainer.scrollLeft += evt.deltaY;
+    });
+
+    function cargarMeses() {
+        const cont = document.getElementById('contenedor-meses');
+        cont.innerHTML = "";
+        const mesActual = new Date().getMonth();
+        mesesCortos.forEach((mes, index) => {
+            const div = document.createElement('div');
+            div.className = 'casilla';
+            if(index < mesActual) div.classList.add('ocupado');
+            div.innerHTML = `<span>${mes}</span>`;
+            div.onclick = () => { if(index >= mesActual) { mesSel = index; irAlPaso(2); } };
+            cont.appendChild(div);
+        });
+    }
+
+    function irAlPaso(paso) {
+        document.querySelectorAll('.step').forEach(s => s.classList.remove('active'));
+        document.getElementById('paso' + paso).classList.add('active');
+        if (paso === 2) generarDias();
+        if (paso === 4) {
+            document.getElementById('info-duracion').innerText = `Sesión Estimada: ${duracionSel} hora(s)`;
+            generarHoras();
+        }
+    }
+
+    function generarDias() {
+        const cont = document.getElementById('contenedor-dias');
+        cont.innerHTML = "";
+        const hoy = new Date();
+        const año = hoy.getFullYear();
+        const diasMes = new Date(año, mesSel + 1, 0).getDate();
+        
+        for (let i = 1; i <= diasMes; i++) {
+            const fecha = new Date(año, mesSel, i);
+            const esPasado = (i < hoy.getDate() && hoy.getMonth() === mesSel);
+
+            if (fecha.getDay() !== 0) { 
+                const div = document.createElement('div');
+                div.className = 'casilla';
+                if(esPasado) div.classList.add('ocupado');
+                div.style.minHeight = '65px';
+                div.innerHTML = `<span>${i}</span>`;
+                div.onclick = () => { if(!esPasado) { diaSel = i; irAlPaso(3); } };
+                cont.appendChild(div);
+            }
+        }
+    }
+
+    function seleccionarTamano(nombre, horas) {
+        tamanoSel = nombre;
+        duracionSel = horas;
+        irAlPaso(4);
+    }
+
+    async function generarHoras() {
+        const cont = document.getElementById('contenedor-horas');
+        const loading = document.getElementById('loading-msg');
+        cont.innerHTML = "";
+        loading.style.display = "block";
+
+        const hoyUru = new Date(new Date().toLocaleString("en-US", {timeZone: "America/Montevideo"}));
+        const año = hoyUru.getFullYear();
+        const mesPad = String(mesSel + 1).padStart(2, '0');
+        const diaPad = String(diaSel).padStart(2, '0');
+        
+        const timeMin = `${año}-${mesPad}-${diaPad}T00:00:00Z`;
+        const timeMax = `${año}-${mesPad}-${diaPad}T23:59:59Z`;
+
+        let horasBloqueadas = [];
+
+        try {
+            const response = await fetch(`/api/disponibilidad?start=${timeMin}&end=${timeMax}`);
+            const eventosOcupados = await response.json();
+            
+            eventosOcupados.forEach(event => {
+                const inicio = new Date(event.inicio);
+                const fin = new Date(event.fin);
+                for (let h = inicio.getHours(); h < fin.getHours(); h++) {
+                    horasBloqueadas.push(h);
+                }
+            });
+        } catch (error) {
+            console.error("Error consultando disponibilidad:", error);
+        }
+
+        loading.style.display = "none";
+        
+        // El horario de cierre es a las 22:00
+        const horaLimite = 22 - duracionSel;
+
+        for (let h = 9; h <= horaLimite; h++) {
+            const hInicio = h + ":00";
+            const hFin = (h + duracionSel) + ":00";
+            
+            const esMismoDia = (diaSel === hoyUru.getDate() && mesSel === hoyUru.getMonth());
+            const esHoraPasada = esMismoDia && (h <= hoyUru.getHours());
+
+            let ocupadoPorAgenda = false;
+            for(let i = 0; i < duracionSel; i++) {
+                if (horasBloqueadas.includes(h + i)) {
+                    ocupadoPorAgenda = true;
+                    break;
+                }
+            }
+
+            const div = document.createElement('div');
+            div.className = 'casilla';
+            div.style.minHeight = '60px';
+
+            if (ocupadoPorAgenda || esHoraPasada) {
+                div.classList.add('ocupado');
+                div.innerHTML = `<span>${hInicio}</span><small>${esHoraPasada ? 'PASADO' : 'NO DISP.'}</small>`;
+            } else {
+                div.innerHTML = `<span>${hInicio}</span>`;
+                div.onclick = () => finalizar(hInicio, hFin);
+            }
+            cont.appendChild(div);
+        }
+    }
+
+    function finalizar(inicio, fin) {
+        const citaTemporal = {
+            mes: mesesNombres[mesSel],
+            dia: diaSel,
+            tamano: tamanoSel,
+            horaInicio: inicio,
+            horaFin: fin,
+            duracion: duracionSel
+        };
+        localStorage.setItem('citaRichardTattoo', JSON.stringify(citaTemporal));
+        window.location.href = 'zona.html';
+    }
+
+    cargarMeses();
+</script>
+</body>
+</html>

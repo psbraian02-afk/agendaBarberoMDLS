@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro - RichardTattoo</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700&family=Playfair+Display:ital,wght@0,400;1,700&display=swap" rel="stylesheet">
+    <style>
+        /* Configuración de Lujo Alineada al Sistema */
+        :root {
+            --gold: #f1c40f;
+            --bg: #0a0a0a;
+            --card: #141414;
+            --text-main: #ffffff;
+            --text-dim: #a0a0a0;
+            --transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        body {
+            margin: 0;
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg);
+            color: var(--text-main);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-image: radial-gradient(circle at center, #111 0%, #0a0a0a 100%);
+        }
+
+        .container {
+            background-color: var(--card);
+            padding: 40px 30px;
+            border-radius: 2px;
+            box-shadow: 0 30px 60px rgba(0,0,0,0.8);
+            width: 90%;
+            max-width: 400px;
+            text-align: center;
+            border: 1px solid rgba(255,255,255,0.05);
+            position: relative;
+            animation: fadeIn 0.8s ease-out;
+        }
+
+        @keyframes fadeIn { 
+            from { opacity: 0; transform: translateY(20px); } 
+            to { opacity: 1; transform: translateY(0); } 
+        }
+
+        h2 { 
+            font-family: 'Playfair Display', serif;
+            color: var(--gold); 
+            margin-bottom: 30px; 
+            text-transform: uppercase; 
+            letter-spacing: 3px;
+            font-size: 1.5rem;
+        }
+
+        .input-group { text-align: left; margin-bottom: 20px; }
+
+        label { 
+            display: block; 
+            margin-bottom: 8px; 
+            color: var(--text-dim); 
+            font-size: 0.75rem; 
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            font-weight: 700;
+        }
+
+        input {
+            width: 100%;
+            padding: 15px;
+            box-sizing: border-box;
+            background: #0d0d0d;
+            border: 1px solid #222;
+            color: white;
+            border-radius: 2px;
+            outline: none;
+            font-family: 'Inter', sans-serif;
+            transition: var(--transition);
+        }
+
+        input:focus { border-color: var(--gold); background: #111; }
+
+        .phone-container { position: relative; display: flex; align-items: center; }
+        
+        .prefix {
+            background: #1a1a1a;
+            padding: 15px;
+            border: 1px solid #222;
+            border-right: none;
+            border-radius: 2px 0 0 2px;
+            color: var(--gold);
+            font-size: 0.9rem;
+            font-weight: 700;
+        }
+
+        .phone-input { border-radius: 0 2px 2px 0; }
+
+        .btn-guardar {
+            width: 100%;
+            background-color: var(--gold);
+            color: #000;
+            border: none;
+            padding: 18px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            cursor: pointer;
+            border-radius: 2px;
+            margin-top: 10px;
+            transition: var(--transition);
+            font-size: 0.85rem;
+        }
+
+        .btn-guardar:hover { 
+            background-color: #fff; 
+            transform: translateY(-2px);
+        }
+
+        .btn-volver {
+            display: inline-block;
+            margin-top: 25px;
+            color: #555;
+            text-decoration: none;
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            transition: var(--transition);
+            cursor: pointer;
+            background: none;
+            border: none;
+        }
+
+        .btn-volver:hover { color: var(--gold); }
+
+        .error-msg { 
+            color: #ff4d4d; 
+            font-size: 0.7rem; 
+            margin-top: 7px; 
+            display: none; 
+            letter-spacing: 0.5px;
+        }
+
+        /* Línea superior decorativa */
+        .container::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 1px;
+            background: linear-gradient(90deg, transparent, var(--gold), transparent);
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2>Registro de Cliente</h2>
+    
+    <div class="input-group">
+        <label>Nombre y Apellido</label>
+        <input type="text" id="nombre" placeholder="Ej: Juan Pérez">
+    </div>
+
+    <div class="input-group">
+        <label>Teléfono (8 dígitos)</label>
+        <div class="phone-container">
+            <span class="prefix">+598</span>
+            <input type="tel" id="telefono" class="phone-input" placeholder="91923107" maxlength="8">
+        </div>
+        <p id="error-tel" class="error-msg">Ingresa los 8 dígitos (ej: 91923107)</p>
+    </div>
+
+    <button class="btn-guardar" onclick="guardarDatos()">Guardar y Continuar</button>
+    
+    <br>
+    <button class="btn-volver" onclick="window.location.href='index.html'">
+        ← Volver al inicio
+    </button>
+</div>
+
+<script>
+function guardarDatos() {
+    const nombre = document.getElementById('nombre').value;
+    const telefono = document.getElementById('telefono').value;
+    const errorTel = document.getElementById('error-tel');
+    const telRegex = /^[0-9]{8}$/;
+
+    if (nombre.trim() === "" || !telRegex.test(telefono)) {
+        if (errorTel) errorTel.style.display = !telRegex.test(telefono) ? "block" : "none";
+        alert("Por favor, completa los datos correctamente.");
+        return;
+    }
+
+    // 1. Guardamos localmente en el objeto original que ya tenías
+    const usuario = { nombre: nombre, telefono: "+598" + telefono };
+    localStorage.setItem('clienteRichardTattoo', JSON.stringify(usuario));
+
+    // 2. IMPORTANTE: Guardamos llaves individuales para que revision.html las encuentre fácil
+    localStorage.setItem('clienteNombre', nombre);
+    localStorage.setItem('clienteTelefono', "+598" + telefono);
+
+    alert("¡Registro completado con éxito! Bienvenido, " + nombre);
+    
+    // 3. Redirigir al menú principal
+    window.location.href = "index.html";
+}
+</script>
+
+</body>
+</html>

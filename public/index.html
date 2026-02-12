@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RichardTattoo | Estudio Privado</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700&family=Playfair+Display:ital,wght@0,400;1,700&display=swap" rel="stylesheet">
+    <style>
+        /* --- ESTILO PREMIUM PRO RENOVADO --- */
+        :root {
+            --gold: #f1c40f;
+            --gold-bright: #fff0a1;
+            --bg: #050505; 
+            --card: #0f0f0f;
+            --text-main: #ffffff;
+            --text-dim: #909090;
+            --transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+            --glow: 0 0 20px rgba(241, 196, 15, 0.3);
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg);
+            background-image: radial-gradient(circle at top, #151515 0%, #050505 100%);
+            color: var(--text-main);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+            overflow-x: hidden;
+            padding-top: 60px;
+        }
+
+        /* --- ANIMACIONES --- */
+        @keyframes shine {
+            0% { left: -100%; }
+            20% { left: 100%; }
+            100% { left: 100%; }
+        }
+
+        @keyframes pulseGlow {
+            0% { box-shadow: 0 0 10px rgba(241, 196, 15, 0.2); }
+            50% { box-shadow: 0 0 30px rgba(241, 196, 15, 0.5); }
+            100% { box-shadow: 0 0 10px rgba(241, 196, 15, 0.2); }
+        }
+
+        .reveal {
+            transition: all 1s ease-out;
+        }
+
+        /* --- NAVBAR REFINADA --- */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background: rgba(5, 5, 5, 0.9);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(241, 196, 15, 0.1);
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            padding: 15px 0;
+            z-index: 1000;
+        }
+
+        .nav-item {
+            color: var(--text-dim);
+            text-decoration: none;
+            font-size: 0.65rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-weight: 700;
+            transition: var(--transition);
+        }
+
+        .nav-item:hover {
+            color: var(--gold);
+            text-shadow: 0 0 10px var(--gold);
+        }
+
+        /* --- SECCIÓN PRINCIPAL PREMIUM --- */
+        .main-menu {
+            text-align: center;
+            padding: 60px 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+            max-width: 800px;
+        }
+
+        .logo-placeholder {
+            width: 140px;
+            height: 140px;
+            border-radius: 50%;
+            border: 2px solid var(--gold);
+            margin-bottom: 25px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #000;
+            overflow: hidden;
+            box-shadow: var(--glow);
+            transition: var(--transition);
+            animation: pulseGlow 3s infinite;
+        }
+
+        .logo-placeholder img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.8rem;
+            letter-spacing: 4px;
+            margin: 0;
+            text-transform: uppercase;
+            font-weight: 700;
+            background: linear-gradient(135deg, #fff 0%, var(--gold) 50%, #fff 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            filter: drop-shadow(0 0 10px rgba(255,255,255,0.1));
+        }
+
+        .subtitle {
+            color: var(--gold);
+            letter-spacing: 10px;
+            text-transform: uppercase;
+            font-size: 0.75rem;
+            margin: 10px 0 45px 0;
+            font-weight: 300;
+            opacity: 0.8;
+        }
+
+        /* --- BOTONES ULTRA PRO --- */
+        .btn-container {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .btn {
+            background: linear-gradient(135deg, #1a1a1a 0%, #000 100%);
+            color: var(--gold);
+            border: 1px solid var(--gold);
+            padding: 20px 45px;
+            font-size: 0.8rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            cursor: pointer;
+            transition: var(--transition);
+            border-radius: 4px;
+            width: 280px;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.5);
+        }
+
+        /* Brillo metálico animado */
+        .btn::after {
+            content: '';
+            position: absolute;
+            top: 0; left: -100%;
+            width: 50%; height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transform: skewX(-25deg);
+            animation: shine 4s infinite;
+        }
+
+        .btn:hover {
+            transform: translateY(-3px) scale(1.02);
+            background: var(--gold);
+            color: #000;
+            box-shadow: 0 0 30px rgba(241, 196, 15, 0.6);
+            border-color: var(--gold-bright);
+        }
+
+        .btn-registro {
+            background: transparent;
+            border-color: rgba(255,255,255,0.2);
+            color: #fff;
+        }
+
+        .btn-registro:hover {
+            background: #fff;
+            color: #000;
+            border-color: #fff;
+            box-shadow: 0 0 30px rgba(255, 255, 255, 0.4);
+        }
+
+        /* --- SECCIONES --- */
+        section {
+            width: 100%;
+            max-width: 550px;
+            padding: 80px 25px;
+            text-align: center;
+            border-bottom: 1px solid rgba(241, 196, 15, 0.05);
+        }
+
+        h2 {
+            font-family: 'Playfair Display', serif;
+            color: var(--gold);
+            font-size: 1.8rem;
+            margin-bottom: 25px;
+            letter-spacing: 2px;
+            font-style: italic;
+        }
+
+        p {
+            color: var(--text-dim);
+            line-height: 1.8;
+            font-size: 0.95rem;
+            font-weight: 300;
+        }
+
+        .info-box {
+            background: linear-gradient(180deg, #111 0%, #0a0a0a 100%);
+            padding: 25px;
+            border: 1px solid rgba(241, 196, 15, 0.1);
+            border-radius: 8px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            margin-top: 15px;
+        }
+
+        .horarios-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .horarios-list li {
+            padding: 12px 0;
+            display: flex;
+            justify-content: space-between;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+            font-size: 0.85rem;
+            letter-spacing: 1px;
+        }
+
+        /* --- MAPA --- */
+        .map-container {
+            width: 100%;
+            height: 250px;
+            border: 1px solid var(--gold);
+            border-radius: 8px;
+            margin-top: 25px;
+            filter: grayscale(1) invert(0.9);
+            transition: var(--transition);
+            overflow: hidden;
+            box-shadow: 0 0 20px rgba(0,0,0,0.5);
+        }
+
+        .map-container:hover {
+            filter: grayscale(0) invert(0);
+        }
+
+        .map-container iframe {
+            width: 100%; height: 100%; border: none;
+        }
+
+        footer {
+            padding: 60px;
+            font-size: 0.65rem;
+            letter-spacing: 3px;
+            color: #444;
+            text-transform: uppercase;
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="navbar">
+        <a href="#inicio" class="nav-item">Inicio</a>
+        <a href="#sobre-mi" class="nav-item">Artista</a>
+        <a href="#horarios" class="nav-item">Horario</a>
+        <a href="#ubicacion" class="nav-item">Estudio</a>
+    </nav>
+
+    <div class="main-menu reveal" id="inicio">
+        <div class="logo-placeholder">
+            <img src="logo.png" alt="RichardTattoo Logo" onerror="this.src='https://via.placeholder.com/150/000/f1c40f?text=RT'">
+        </div>
+
+        <h1>Richard Tattoo</h1>
+        <div class="subtitle">Estudio Privado</div>
+
+        <div class="btn-container">
+            <button class="btn" onclick="verificarYAgendar()">
+                Agendar Turno
+            </button>
+
+            <button class="btn btn-registro" onclick="window.location.href='registro.html'">
+                Registro de Clientes
+            </button>
+        </div>
+    </div>
+
+    <section id="sobre-mi" class="reveal">
+        <h2>El Arte de la Tinta</h2>
+        <p>Especializado en realismo y trazos de alta precisión. Cada tatuaje es una obra maestra diseñada exclusivamente para fluir con la anatomía del cuerpo. RichardTattoo redefine la experiencia del tatuaje privado.</p>
+    </section>
+
+    <section id="horarios" class="reveal">
+        <h2>Horarios de Atención</h2>
+        <div class="info-box">
+            <ul class="horarios-list">
+                <li><span>LUNES</span> <span>09:00 - 21:00</span></li>
+                <li><span>MARTES</span> <span>09:00 - 21:00</span></li>
+                <li><span>MIÉRCOLES</span> <span>09:00 - 21:00</span></li>
+                <li><span>JUEVES</span> <span>09:00 - 21:00</span></li>
+                <li><span>VIERNES</span> <span>09:00 - 21:00</span></li>
+                <li><span>SÁBADO</span> <span>09:00 - 21:00</span></li>
+                <li style="border: none; color: #ff4d4d;"><span>DOMINGO</span> <span>CERRADO</span></li>
+            </ul>
+        </div>
+    </section>
+
+    <section id="ubicacion" class="reveal">
+        <h2>Visita el Estudio</h2>
+        <p style="color: var(--gold); font-weight: 700; font-size: 1.1rem; margin-bottom: 5px;">Artigas, Cerro Ejido</p>
+        <p style="margin-top: 0;">Calle 2, RichardTattoo</p>
+        <div class="map-container" onclick="window.open('https://www.google.com/maps/place/Richard+Tattoo/@-30.4266551,-56.4660394,19.25z/data=!4m6!3m5!1s0x95ab09003b0062eb:0x52d8bae27fec5a8f!8m2!3d-30.4265772!4d-56.4660584!16s%2Fg%2F11m6l13ypg?hl=es&entry=ttu&g_ep=EgoyMDI2MDIwNC4wIKXMDSoASAFQAw%3D%3D')">
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d13735.000000000000!2d-56.5000000!3d-30.4000000!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x95addd9560000001%3A0x0!2sArtigas!5e0!3m2!1ses!2suy!4v1700000000000!5m2!1ses!2suy" allowfullscreen="" loading="lazy"></iframe>
+        </div>
+    </section>
+
+    <footer>
+        © 2026 RichardTattoo • Excelencia en Tatuajes
+    </footer>
+
+    <script>
+        function verificarYAgendar() {
+            const clienteGuardado = localStorage.getItem('clienteRichardTattoo');
+            if (clienteGuardado) {
+                window.location.href = 'agenda.html';
+            } else {
+                alert("Bienvenido. Para agendar su sesión, por favor complete su registro de cliente.");
+                window.location.href = 'registro.html';
+            }
+        }
+
+        const observerOptions = { threshold: 0.1 };
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = "1";
+                    entry.target.style.transform = "translateY(0)";
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.reveal').forEach(el => {
+            el.style.opacity = "0";
+            el.style.transform = "translateY(30px)";
+            observer.observe(el);
+        });
+    </script>
+</body>
+</html>
