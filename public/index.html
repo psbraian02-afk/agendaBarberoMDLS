@@ -3,15 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Richard Barber | Exclusive Cuts</title>
+    <title>LDMS STUDIO | Exclusive Services</title>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            /* PALETA MONOCROMÁTICA DE LUJO */
-            --bg-body: #f8f9fa;        /* Gris casi blanco */
-            --text-main: #111111;      /* Negro Carbón */
-            --text-light: #555555;     /* Gris Humo */
-            --accent: #000000;         /* Acento Negro Puro */
+            --bg-body: #f8f9fa;
+            --text-main: #111111;
+            --text-light: #555555;
+            --accent: #000000;
             --border: rgba(0,0,0,0.08);
             --card-bg: #ffffff;
             --shadow-soft: 0 10px 40px -10px rgba(0,0,0,0.08);
@@ -31,12 +30,11 @@
             position: relative;
         }
 
-        /* --- PARTICULAS INTENSAS --- */
         #particles-js {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
             z-index: 0;
-            background: #ffffff; /* Fondo base blanco */
+            background: #ffffff;
         }
 
         /* --- NAVBAR --- */
@@ -100,22 +98,28 @@
             z-index: 1;
         }
 
+        /* LOGO OPTIMIZADO: Sin círculo y con resplandor de silueta */
         .logo-container {
-            width: 140px;
-            height: 140px;
-            margin-bottom: 30px;
-            border-radius: 50%;
-            background: #fff;
-            padding: 5px;
-            box-shadow: var(--shadow-soft);
-            border: 1px solid var(--border);
+            width: 180px;
+            height: auto;
+            margin-bottom: 20px;
+            background: transparent; /* Eliminado el fondo blanco */
+            box-shadow: none; /* Eliminada la sombra circular */
+            border: none; /* Eliminado el borde */
         }
         
         .logo-container img {
-            width: 100%; height: 100%; 
-            object-fit: cover; 
-            border-radius: 50%;
-            filter: grayscale(100%) contrast(1.2); /* Efecto B&N elegante */
+            width: 100%; 
+            height: auto; 
+            object-fit: contain;
+            /* Resplandor de silueta (drop-shadow es mejor para PNG transparentes) */
+            filter: drop-shadow(0 0 15px rgba(0,0,0,0.15));
+            transition: var(--transition);
+        }
+        
+        .logo-container img:hover {
+            filter: drop-shadow(0 0 25px rgba(0,0,0,0.3));
+            transform: scale(1.05);
         }
 
         h1 {
@@ -140,7 +144,6 @@
             background: rgba(255,255,255,0.8);
         }
 
-        /* --- BOTONES MINIMALISTAS --- */
         .btn-container {
             display: flex; flex-direction: column; gap: 15px; width: 100%; max-width: 280px;
         }
@@ -172,7 +175,6 @@
         }
         .btn-registro:hover { border-color: var(--text-main); }
 
-        /* --- SECCIONES TIPO TARJETA --- */
         section {
             max-width: 650px;
             margin: 40px auto;
@@ -194,7 +196,6 @@
             display: inline-block;
         }
         
-        /* Pequeño detalle decorativo bajo el título */
         h2::after {
             content: ''; display: block; width: 40px; height: 2px; 
             background: var(--text-main); margin: 15px auto 0;
@@ -206,7 +207,6 @@
             font-style: italic;
         }
 
-        /* --- HORARIOS --- */
         .horarios-list li {
             padding: 15px 0;
             display: flex;
@@ -218,7 +218,6 @@
         .horarios-list li span:first-child { font-weight: 700; color: var(--text-main); }
         .horarios-list li:last-child { border: none; }
 
-        /* --- UBICACION --- */
         .location-btn-large {
             display: block; width: 100%; padding: 20px;
             background: #fff; border: 1px solid var(--text-main);
@@ -237,7 +236,6 @@
             padding: 20px;
         }
 
-        /* --- FLOAT BUTTON --- */
         .btn-floating {
             position: fixed; bottom: 30px; right: 30px;
             width: 60px; height: 60px;
@@ -262,7 +260,6 @@
             position: relative; z-index: 2;
         }
 
-        /* Animaciones */
         .reveal { opacity: 0; transform: translateY(40px); transition: 1s ease; }
         .reveal.active { opacity: 1; transform: translateY(0); }
     </style>
@@ -272,7 +269,7 @@
     <div id="particles-js"></div>
 
     <nav class="navbar">
-        <div class="brand-logo">RICHARD</div>
+        <div class="brand-logo">LDMS STUDIO</div>
         <div class="nav-links">
             <a href="#inicio" class="nav-item">Reserva</a>
             <a href="#sobre-mi" class="nav-item">Studio</a>
@@ -287,10 +284,10 @@
 
     <div class="main-menu" id="inicio">
         <div class="logo-container reveal active">
-            <img src="logo.png" alt="Richard Logo" onerror="this.src='https://cdn-icons-png.flaticon.com/512/10972/10972236.png'">
+            <img src="logo.png" alt="LDMS Logo" onerror="this.src='https://cdn-icons-png.flaticon.com/512/10972/10972236.png'">
         </div>
         
-        <h1 class="reveal active">RICHARD<br>BARBER</h1>
+        <h1 class="reveal active">LDMS<br>STUDIO</h1>
         <div class="subtitle reveal active">Estética Masculina Premium</div>
         
         <div class="btn-container reveal active">
@@ -322,66 +319,68 @@
         <p style="color: var(--text-light); margin-bottom: 20px;">ARTIGAS, URUGUAY</p>
         
         <div class="address-text">
-            <p><strong>RICHARD BARBER SHOP</strong></p>
+            <p><strong>LDMS STUDIO</strong></p>
             <p>C. 2, HGFM+9H8</p>
             <p>55000 Artigas, Departamento de Artigas</p>
         </div>
 
-        <a href="https://www.google.com/maps/search/?api=1&query=Richard+Tattoo+Artigas+HGFM%2B9H8" target="_blank" class="location-btn-large">
+        <a href="https://maps.google.com/?q=HGFM+9H8+Artigas" target="_blank" class="location-btn-large">
             Ver en Mapa
         </a>
     </section>
 
     <footer>
-        © 2026 RICHARD BARBER SHOP <br>
+        © 2026 LDMS STUDIO <br>
         <span style="font-weight: 700; color: #000;">BRAIAN PEREIRA</span>
     </footer>
 
     <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
     <script>
-        // CONFIGURACIÓN INTENSA DE PARTÍCULAS (Gris sobre Blanco)
+        // CONFIGURACIÓN DE PARTÍCULAS "ELEGANTES" (Polígonos y líneas finas)
         particlesJS("particles-js", {
             "particles": {
                 "number": { 
-                    "value": 100, // Cantidad INTENSA
+                    "value": 60, 
                     "density": { "enable": true, "value_area": 800 } 
                 },
-                "color": { "value": "#222222" }, // Color casi negro
-                "shape": { "type": "circle" },
-                "opacity": { 
-                    "value": 0.5, // Visibles pero elegantes
-                    "random": false 
+                "color": { "value": "#000000" }, 
+                "shape": { 
+                    "type": "polygon", // Forma más geométrica y elegante
+                    "polygon": { "nb_sides": 5 }
                 },
-                "size": { "value": 3, "random": true },
+                "opacity": { 
+                    "value": 0.2, 
+                    "random": true 
+                },
+                "size": { "value": 2, "random": true },
                 "line_linked": { 
-                    "enable": true, // CONEXIONES ACTIVADAS (Red)
+                    "enable": true, 
                     "distance": 150, 
-                    "color": "#999999", 
-                    "opacity": 0.4, 
-                    "width": 1 
+                    "color": "#000000", 
+                    "opacity": 0.1, 
+                    "width": 0.5 
                 },
                 "move": { 
                     "enable": true, 
-                    "speed": 2, 
-                    "direction": "none", 
-                    "random": false, 
+                    "speed": 1.5, 
+                    "direction": "top-right", 
+                    "random": true, 
                     "out_mode": "out" 
                 }
             },
             "interactivity": {
                 "detect_on": "canvas",
                 "events": {
-                    "onhover": { "enable": true, "mode": "grab" }, // Efecto al pasar el mouse/dedo
+                    "onhover": { "enable": true, "mode": "bubble" },
                     "onclick": { "enable": true, "mode": "push" }
                 },
                 "modes": {
-                    "grab": { "distance": 140, "line_linked": { "opacity": 1 } }
+                    "bubble": { "distance": 200, "size": 4, "duration": 2, "opacity": 0.5 }
                 }
             },
             "retina_detect": true
         });
 
-        // Funciones originales intactas
         function verificarYAgendar() {
             const clienteGuardado = localStorage.getItem('clienteRichardTattoo');
             if (clienteGuardado) { 
@@ -395,7 +394,6 @@
         const mainBtn = document.getElementById('mainBookingBtn');
         const floatingBtn = document.getElementById('floatingBtn');
         
-        // Observer para botón flotante
         const buttonObserver = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (!entry.isIntersecting) floatingBtn.classList.add('visible');
@@ -404,7 +402,6 @@
         }, { threshold: 0 });
         if(mainBtn) buttonObserver.observe(mainBtn);
 
-        // Observer para animaciones al hacer scroll
         const revealObserver = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) entry.target.classList.add('active');
