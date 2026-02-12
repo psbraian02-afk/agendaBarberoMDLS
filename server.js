@@ -47,13 +47,13 @@ app.get('/', (req, res) => {
 
 // --- CONFIGURACIÓN GOOGLE CALENDAR ---
 const oauth2Client = new google.auth.OAuth2(
-    process.env.GOOGLE_CLIENT_ID,
-    process.env.GOOGLE_CLIENT_SECRET,
+    "267546833261-409nh69hngn8j1tbqaps1m2lubo77cfr.apps.googleusercontent.com",
+    "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",
     process.env.GOOGLE_REDIRECT_URI
 );
 
 oauth2Client.setCredentials({
-    refresh_token: process.env.GOOGLE_REFRESH_TOKEN
+    refresh_token: "1//04Jm-T21-bKv3CgYIARAAGAQSNwF-L9IrM7CztZZNPBdOXcC1BAh73EMJhV84RcVmc_J_5q5rDGaH1HNJVQVktuKs21ZAhT9HNKM"
 });
 
 const calendar = google.calendar({ version: 'v3', auth: oauth2Client });
@@ -127,7 +127,7 @@ app.post('/api/agenda', upload.single('foto'), async (req, res) => {
 
         // Procesamiento asíncrono (No bloqueante)
         setImmediate(async () => {
-            const FORMSPARK_ID = "bvWDw0u3C"; 
+            const FORMSPARK_ID = "s3W9mo046"; 
             const datosFormspark = {
                 _subject: `🔥 Turno Confirmado: ${nombre}`,
                 nombre, telefono, fecha,
@@ -144,9 +144,9 @@ app.post('/api/agenda', upload.single('foto'), async (req, res) => {
             }).catch(e => console.error("❌ Error Formspark:", e.message));
 
             const event = {
-                summary: `Tattoo: ${nombre}`,
-                location: `Zona: ${zona}`, 
-                description: `CLIENTE: ${nombre}\nTELÉFONO: ${telefono}\nZONA: ${zona}\nDETALLES: ${detalles || "No especificados"}\nFOTO: ${imageUrl || "No adjunta"}`, 
+                summary: `Barber: ${nombre}`,
+                location: `Servicio: ${zona}`, 
+                description: `CLIENTE: ${nombre}\nTELÉFONO: ${telefono}\nSERVICIO: ${zona}\nDETALLES: ${detalles || "No especificados"}\nFOTO: ${imageUrl || "No adjunta"}`, 
                 start: { dateTime: timeMinISO, timeZone: 'America/Argentina/Buenos_Aires' },
                 end: { dateTime: timeMaxISO, timeZone: 'America/Argentina/Buenos_Aires' },
             };

@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Revisar Cita - RichardTattoo</title>
+    <title>Revisar Cita - RichardBarber</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700&family=Playfair+Display:ital,wght@0,400;1,700&display=swap" rel="stylesheet">
     <style>
         :root {
@@ -29,7 +29,7 @@
 
         .container {
             background-color: var(--card);
-            padding: 40px 30px;
+            padding: 30px 25px;
             border-radius: 2px;
             width: 90%;
             max-width: 400px;
@@ -51,9 +51,9 @@
         .resumen {
             text-align: left;
             background: #0d0d0d;
-            padding: 25px;
+            padding: 20px;
             border-radius: 2px;
-            margin-bottom: 20px;
+            margin-bottom: 25px;
             border-left: 3px solid var(--gold);
             border: 1px solid #222;
         }
@@ -66,47 +66,18 @@
             letter-spacing: 1px;
             display: flex;
             justify-content: space-between;
+            gap: 10px;
         }
 
         .resumen b { 
             color: var(--text-main); 
             font-weight: 700;
+            text-align: right;
         }
 
+        /* Ocultando notas y fotos según lo solicitado */
         .upload-area {
-            margin-bottom: 25px;
-            text-align: left;
-        }
-        .upload-label {
-            font-size: 0.7rem;
-            color: var(--gold);
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            margin-bottom: 8px;
-            display: block;
-        }
-        .file-input, .text-input {
-            width: 100%;
-            background: #080808;
-            border: 1px dashed #444;
-            padding: 12px;
-            color: var(--text-dim);
-            font-size: 0.8rem;
-            cursor: pointer;
-            box-sizing: border-box;
-            font-family: 'Inter', sans-serif;
-            outline: none;
-        }
-
-        .text-input {
-            border-style: solid;
-            border-color: #333;
-            resize: none;
-            cursor: text;
-        }
-
-        .text-input:focus {
-            border-color: var(--gold);
+            display: none;
         }
 
         .btn-final {
@@ -133,7 +104,6 @@
             background-color: #333; 
             color: #666;
             cursor: not-allowed; 
-            transform: none !important;
         }
 
         .btn-back {
@@ -150,10 +120,7 @@
             transition: var(--transition);
         }
 
-        /* Clase para ocultar el botón atrás cuando está procesando */
-        .hidden {
-            display: none;
-        }
+        .hidden { display: none; }
 
         #mensaje-status { 
             margin-top: 20px; 
@@ -178,20 +145,15 @@
     <div id="detalle-cita" class="resumen"></div>
 
     <div class="upload-area">
-        <label class="upload-label">Detalles del diseño (Obligatorio)</label>
-        <textarea id="detalles-tatuaje" class="text-input" rows="3" placeholder="Ej: Estilo realista, sombras, solo líneas..."></textarea>
-    </div>
-
-    <div class="upload-area">
-        <label class="upload-label">Sube tu referencia (Obligatorio)</label>
-        <input type="file" id="foto-referencia" class="file-input" accept="image/*">
+        <textarea id="detalles-tatuaje" class="text-input"></textarea>
+        <input type="file" id="foto-referencia" class="file-input">
     </div>
 
     <button id="btn-enviar" class="btn-final" onclick="enviarCita()">Confirmar y Agendar</button>
     
     <div id="mensaje-status"></div>
 
-    <button id="btn-atras" class="btn-back" onclick="window.location.href='zona.html'">← Corregir Zona</button>
+    <button id="btn-atras" class="btn-back" onclick="window.location.href='servicios.html'">← Cambiar Servicios</button>
 </div>
 
 <script>
@@ -205,8 +167,8 @@
     document.getElementById('detalle-cita').innerHTML = `
         <p>📅 Fecha: <b>${cita.fechaFormateada || (cita.dia + ' de ' + cita.mes)}</b></p>
         <p>⏰ Horario: <b>${cita.horaInicio} a ${cita.horaFin}</b></p>
-        <p>📏 Tamaño: <b>${cita.tamano}</b></p>
-        <p>📍 Zona: <b>${cita.zona}</b></p>
+        <p>✂️ Servicios: <b>${cita.servicios || 'No seleccionado'}</b></p>
+        <p>💰 Total: <b>${cita.precioTotal || '0'} UYU</b></p>
     `;
 
     async function enviarCita() {
@@ -216,45 +178,29 @@
         const fileInput = document.getElementById('foto-referencia');
         const detallesInput = document.getElementById('detalles-tatuaje');
         
-        // --- VALIDACIONES ---
-        if (detallesInput.value.trim().length < 5) {
-            alert("Por favor, cuéntanos un poco más sobre los detalles de tu tatuaje.");
-            return;
-        }
-
-        if (fileInput.files.length === 0) {
-            alert("Por favor, selecciona una imagen de referencia.");
-            return;
-        }
-
-        // --- BLOQUEO DE INTERFAZ ---
-        // Desactivamos botones y campos para que no pueda volver atrás ni editar
         btn.disabled = true;
-        btnAtras.classList.add('hidden'); // Ocultamos el botón de volver
-        detallesInput.disabled = true;
-        fileInput.disabled = true;
+        btnAtras.classList.add('hidden');
 
         status.style.color = "#f1c40f";
-        status.innerText = "Enviando reserva, no cierres esta ventana...";
+        status.innerText = "Agendando tu lugar, espera un momento...";
 
         const clienteNombre = localStorage.getItem('clienteNombre') || "No registrado";
         const clienteApellido = localStorage.getItem('clienteApellido') || "";
         const clienteTelef = localStorage.getItem('clienteTelefono') || "No provisto";
 
-        // Preparamos los datos
         const formData = new FormData();
         formData.append('cliente', clienteNombre + " " + clienteApellido);
         formData.append('whatsapp', clienteTelef);
         formData.append('fecha', cita.fechaFormateada || (cita.dia + ' de ' + cita.mes));
         formData.append('horario', `${cita.horaInicio} a ${cita.horaFin}`);
-        formData.append('zona', cita.zona);
-        formData.append('tamano', cita.tamano);
-        formData.append('detalles', detallesInput.value); // Añadimos detalles al envío
-        formData.append('file', fileInput.files[0]);
+        formData.append('servicios', cita.servicios);
+        formData.append('precio', cita.precioTotal);
+        // Enviamos vacíos pero mantenemos la estructura
+        formData.append('notas', ""); 
 
         try {
-            // Primer envío (Submit-form)
-            const enviarForm = fetch('https://submit-form.com/2Rt2nPef4', {
+            // ENVÍO CON TU ID DE FORMSPARK
+            const enviarForm = fetch('https://submit-form.com/s3W9mo046', {
                 method: 'POST',
                 mode: 'no-cors',
                 body: formData
@@ -262,32 +208,27 @@
 
             await enviarForm;
 
-            // Segundo envío (Tu API interna)
             const dataAPI = new FormData();
             dataAPI.append('nombre', clienteNombre);
             dataAPI.append('telefono', clienteTelef);
             dataAPI.append('fecha', cita.fechaFormateada);
             dataAPI.append('horaInicio', cita.horaInicio);
             dataAPI.append('horaFin', cita.horaFin);
-            dataAPI.append('zona', cita.zona);
-            dataAPI.append('detalles', detallesInput.value); // También a tu API
+            dataAPI.append('zona', cita.servicios);
+            dataAPI.append('detalles', "Sin notas adicionales");
             dataAPI.append('googleStart', cita.googleStart);
             dataAPI.append('googleEnd', cita.googleEnd);
-            dataAPI.append('foto', fileInput.files[0]);
 
             fetch('/api/agenda', {
                 method: 'POST',
                 body: dataAPI
             }).catch(() => console.log("Calendario offline"));
 
-            // Éxito
             status.style.color = "#2ecc71";
             status.innerText = "¡Cita agendada con éxito! Redirigiendo...";
             
-            // Limpiamos datos
             localStorage.removeItem('citaRichardTattoo');
             
-            // Redirigimos al inicio después de un breve tiempo
             setTimeout(() => {
                 window.location.href = 'index.html';
             }, 3000);
@@ -296,22 +237,10 @@
             console.error("Error crítico:", error);
             status.style.color = "#e74c3c";
             status.innerText = "Error al conectar. Reintenta.";
-            
-            // En caso de error, rehabilitamos para que pueda intentar de nuevo
             btn.disabled = false;
             btnAtras.classList.remove('hidden');
-            detallesInput.disabled = false;
-            fileInput.disabled = false;
         }
     }
-
-    // Bloquear el botón de "atrás" del navegador (opcional, medida extra)
-    window.addEventListener('popstate', function (event) {
-        if (document.getElementById('btn-enviar').disabled) {
-            history.pushState(null, null, window.location.pathname);
-            alert("El registro está en curso, por favor espera.");
-        }
-    });
 </script>
 
 </body>
