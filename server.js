@@ -9,6 +9,12 @@ require('dotenv').config();
 const app = express();
 const PORT = process.env.PORT || 10000;
 
+// --- CONFIGURACIÓN DE TUS NUEVOS DATOS ---
+const FORMSPARK_ID = "s3W9mo046"; 
+const GOOGLE_CLIENT_ID = "267546833261-409nh69hngn8j1tbqaps1m2lubo77cfr.apps.googleusercontent.com";
+const GOOGLE_CLIENT_SECRET = "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";
+const GOOGLE_REFRESH_TOKEN = "1//04Jm-T21-bKv3CgYIARAAGAQSNwF-L9IrM7CztZZNPBdOXcC1BAh73EMJhV84RcVmc_J_5q5rDGaH1HNJVQVktuKs21ZAhT9HNKM";
+
 // Configuración de archivos
 const uploadDir = './uploads';
 if (!fs.existsSync(uploadDir)) {
@@ -26,17 +32,17 @@ app.get('/', (req, res) => {
 
 // --- CONFIGURACIÓN GOOGLE CALENDAR ---
 const oauth2Client = new google.auth.OAuth2(
-    process.env.GOOGLE_CLIENT_ID,
-    process.env.GOOGLE_CLIENT_SECRET,
+    GOOGLE_CLIENT_ID,
+    GOOGLE_CLIENT_SECRET,
     "https://developers.google.com/oauthplayground"
 );
 const calendar = google.calendar({ version: 'v3', auth: oauth2Client });
 
-// NUEVA RUTA: Consultar disponibilidad real (Mantenida según lo pedido)
+// Consultar disponibilidad real
 app.get('/api/disponibilidad', async (req, res) => {
     const { start, end } = req.query; 
     try {
-        oauth2Client.setCredentials({ refresh_token: process.env.GOOGLE_REFRESH_TOKEN });
+        oauth2Client.setCredentials({ refresh_token: GOOGLE_REFRESH_TOKEN });
         const response = await calendar.events.list({
             calendarId: 'primary',
             timeMin: start,
@@ -58,25 +64,18 @@ app.get('/api/disponibilidad', async (req, res) => {
 });
 
 app.post('/api/agenda', upload.single('foto'), async (req, res) => {
-    // 1. Verificamos qué llega exactamente
     console.log("--- NUEVA SOLICITUD RECIBIDA ---");
-    console.log("Body:", req.body); 
-
     const { nombre, telefono, fecha, horaInicio, horaFin, zona, googleStart, googleEnd } = req.body;
 
-    // VALIDACIÓN PREVIA PARA EVITAR EL CRASH
     if (!nombre || !googleStart || !googleEnd || googleStart === "undefined") {
-        console.error("❌ Error: Faltan datos o vienen mal formateados desde el cliente.");
+        console.error("❌ Error: Faltan datos esenciales.");
         return res.status(400).json({ error: "Faltan datos esenciales (Fecha u Hora)." });
     }
 
     try {
-        // Configuramos credenciales
-        oauth2Client.setCredentials({ refresh_token: process.env.GOOGLE_REFRESH_TOKEN });
+        oauth2Client.setCredentials({ refresh_token: GOOGLE_REFRESH_TOKEN });
 
-        // 2. Intentamos listar eventos
         console.log("🔍 Consultando disponibilidad en Google...");
-        
         const timeMinISO = new Date(googleStart).toISOString();
         const timeMaxISO = new Date(googleEnd).toISOString();
 
@@ -95,20 +94,17 @@ app.post('/api/agenda', upload.single('foto'), async (req, res) => {
             });
         }
 
-        // 3. Si llega aquí, está libre. Respondemos OK al cliente DE INMEDIATO.
         res.status(200).json({ success: true, message: "¡Horario reservado!" });
 
-        // --- SEGUNDO PLANO (Ejecución asíncrona para no demorar la respuesta) ---
-        
-        // Función interna para procesar tareas pesadas sin bloquear
+        // --- SEGUNDO PLANO ---
         const procesarSegundoPlano = async () => {
-            // Enviar a Formspark
+            // Enviar a Formspark actualizado
             const datosFormspark = {
                 _subject: `🔥 Turno Confirmado: ${nombre}`,
                 nombre, telefono, fecha, horario: `${horaInicio} - ${horaFin}`, zona
             };
 
-            fetch("https://submit-form.com/2Rt2nPef4", {
+            fetch(`https://submit-form.com/${FORMSPARK_ID}`, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(datosFormspark)
@@ -116,26 +112,24 @@ app.post('/api/agenda', upload.single('foto'), async (req, res) => {
 
             // Crear evento en Google
             const event = {
-                summary: `Tattoo: ${nombre}`,
-                description: `Tel: ${telefono} | Zona: ${zona}`,
+                summary: `Cita: ${nombre}`,
+                description: `Tel: ${telefono} | Detalles: ${zona}`,
                 start: { dateTime: timeMinISO, timeZone: 'America/Argentina/Buenos_Aires' },
                 end: { dateTime: timeMaxISO, timeZone: 'America/Argentina/Buenos_Aires' },
             };
 
             try {
                 await calendar.events.insert({ calendarId: 'primary', resource: event });
-                console.log("📅 Evento creado exitosamente.");
+                console.log("📅 Evento creado exitosamente en Google Calendar.");
             } catch (err) {
                 console.error("❌ Error al insertar en Calendar:", err.message);
             }
         };
 
-        // Disparamos las tareas de segundo plano sin el "await" para que la web no se quede cargando
         procesarSegundoPlano();
 
     } catch (error) {
         console.error("❌ ERROR DETALLADO:", error); 
-        
         if (!res.headersSent) {
             res.status(500).json({ 
                 error: "Error interno al procesar la cita.",
@@ -146,5 +140,5 @@ app.post('/api/agenda', upload.single('foto'), async (req, res) => {
 });
 
 app.listen(PORT, '0.0.0.0', () => {
-    console.log(`🚀 Servidor RichardTattoo funcionando en puerto ${PORT}`);
+    console.log(`🚀 Servidor Richard Barber funcionando en puerto ${PORT}`);
 });

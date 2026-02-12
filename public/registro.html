@@ -3,178 +3,186 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Registro - RichardTattoo</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700&family=Playfair+Display:ital,wght@0,400;1,700&display=swap" rel="stylesheet">
+    <title>Registro | Richard Barber</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
     <style>
-        /* Configuración de Lujo Alineada al Sistema */
         :root {
-            --gold: #f1c40f;
-            --bg: #0a0a0a;
-            --card: #141414;
-            --text-main: #ffffff;
-            --text-dim: #a0a0a0;
-            --transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            --accent: #111111;
+            --bg: #ffffff;
+            --card: #ffffff;
+            --text-main: #111111;
+            --text-dim: #999999;
+            --gold: #b08d57; /* Bronce refinado */
+            --border: #f0f0f0;
+            --transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
         }
 
         body {
             margin: 0;
-            font-family: 'Inter', sans-serif;
+            font-family: 'Montserrat', sans-serif;
             background-color: var(--bg);
+            /* Iluminación sutil de fondo */
+            background-image: radial-gradient(circle at 50% 0%, #fdf9f3 0%, #ffffff 100%);
             color: var(--text-main);
             display: flex;
             justify-content: center;
             align-items: center;
             height: 100vh;
-            background-image: radial-gradient(circle at center, #111 0%, #0a0a0a 100%);
         }
 
         .container {
             background-color: var(--card);
-            padding: 40px 30px;
-            border-radius: 2px;
-            box-shadow: 0 30px 60px rgba(0,0,0,0.8);
+            padding: 60px 40px;
             width: 90%;
             max-width: 400px;
             text-align: center;
-            border: 1px solid rgba(255,255,255,0.05);
             position: relative;
-            animation: fadeIn 0.8s ease-out;
+            /* Sombra ligera y elegante */
+            box-shadow: 0 20px 50px rgba(0,0,0,0.03);
+            border: 1px solid var(--border);
+            animation: containerFade 1s var(--transition);
         }
 
-        @keyframes fadeIn { 
-            from { opacity: 0; transform: translateY(20px); } 
-            to { opacity: 1; transform: translateY(0); } 
+        @keyframes containerFade {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
         h2 { 
             font-family: 'Playfair Display', serif;
-            color: var(--gold); 
-            margin-bottom: 30px; 
+            color: var(--accent); 
             text-transform: uppercase; 
-            letter-spacing: 3px;
-            font-size: 1.5rem;
+            font-size: 1.5rem; 
+            margin-bottom: 40px; 
+            letter-spacing: 5px;
+            font-weight: 400;
         }
 
-        .input-group { text-align: left; margin-bottom: 20px; }
+        .input-group { text-align: left; margin-bottom: 25px; }
 
         label { 
             display: block; 
-            margin-bottom: 8px; 
+            margin-bottom: 10px; 
             color: var(--text-dim); 
-            font-size: 0.75rem; 
+            font-size: 0.65rem; 
             text-transform: uppercase;
-            letter-spacing: 1.5px;
+            letter-spacing: 2px;
             font-weight: 700;
         }
 
         input {
             width: 100%;
-            padding: 15px;
+            padding: 18px;
             box-sizing: border-box;
-            background: #0d0d0d;
-            border: 1px solid #222;
-            color: white;
-            border-radius: 2px;
+            background: #fcfcfc;
+            border: 1px solid var(--border);
+            color: var(--text-main);
             outline: none;
-            font-family: 'Inter', sans-serif;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.85rem;
             transition: var(--transition);
         }
 
-        input:focus { border-color: var(--gold); background: #111; }
+        input:focus { 
+            border-color: var(--gold); 
+            background: #fff;
+            box-shadow: 0 5px 15px rgba(176, 141, 87, 0.05);
+        }
 
-        .phone-container { position: relative; display: flex; align-items: center; }
+        .phone-container { display: flex; align-items: center; }
         
         .prefix {
-            background: #1a1a1a;
-            padding: 15px;
-            border: 1px solid #222;
+            background: #f8f8f8;
+            padding: 18px;
+            border: 1px solid var(--border);
             border-right: none;
-            border-radius: 2px 0 0 2px;
             color: var(--gold);
-            font-size: 0.9rem;
+            font-size: 0.85rem;
             font-weight: 700;
         }
 
-        .phone-input { border-radius: 0 2px 2px 0; }
+        .phone-input { border-radius: 0; }
 
         .btn-guardar {
             width: 100%;
-            background-color: var(--gold);
-            color: #000;
+            background-color: var(--accent);
+            color: #fff;
             border: none;
-            padding: 18px;
+            padding: 22px;
             font-weight: 700;
             text-transform: uppercase;
-            letter-spacing: 2px;
+            letter-spacing: 4px;
             cursor: pointer;
-            border-radius: 2px;
-            margin-top: 10px;
+            margin-top: 15px;
             transition: var(--transition);
-            font-size: 0.85rem;
+            font-size: 0.75rem;
+            position: relative;
+            overflow: hidden;
         }
 
         .btn-guardar:hover { 
-            background-color: #fff; 
+            background-color: var(--gold);
             transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(176, 141, 87, 0.2);
         }
 
         .btn-volver {
+            background: none;
+            border: none;
             display: inline-block;
-            margin-top: 25px;
-            color: #555;
+            margin-top: 30px;
+            color: #bbb;
             text-decoration: none;
-            font-size: 0.7rem;
+            font-size: 0.6rem;
             text-transform: uppercase;
             letter-spacing: 2px;
             transition: var(--transition);
             cursor: pointer;
-            background: none;
-            border: none;
         }
 
-        .btn-volver:hover { color: var(--gold); }
+        .btn-volver:hover { color: var(--accent); letter-spacing: 3px; }
 
         .error-msg { 
-            color: #ff4d4d; 
-            font-size: 0.7rem; 
-            margin-top: 7px; 
+            color: #d9534f; 
+            font-size: 0.65rem; 
+            margin-top: 8px; 
             display: none; 
             letter-spacing: 0.5px;
+            text-transform: uppercase;
         }
 
-        /* Línea superior decorativa */
+        /* Línea superior decorativa de oro */
         .container::before {
             content: '';
             position: absolute;
-            top: 0; left: 0; width: 100%; height: 1px;
-            background: linear-gradient(90deg, transparent, var(--gold), transparent);
+            top: 0; left: 0; width: 100%; height: 3px;
+            background: var(--gold);
         }
     </style>
 </head>
 <body>
 
 <div class="container">
-    <h2>Registro de Cliente</h2>
+    <h2>Mi Perfil</h2>
     
     <div class="input-group">
         <label>Nombre y Apellido</label>
-        <input type="text" id="nombre" placeholder="Ej: Juan Pérez">
+        <input type="text" id="nombre" placeholder="Nombre completo">
     </div>
 
     <div class="input-group">
-        <label>Teléfono (8 dígitos)</label>
+        <label>Teléfono (Uruguay)</label>
         <div class="phone-container">
             <span class="prefix">+598</span>
-            <input type="tel" id="telefono" class="phone-input" placeholder="91923107" maxlength="8">
+            <input type="tel" id="telefono" class="phone-input" placeholder="9XXXXXXX" maxlength="8">
         </div>
-        <p id="error-tel" class="error-msg">Ingresa los 8 dígitos (ej: 91923107)</p>
+        <p id="error-tel" class="error-msg">Ingresa los 8 dígitos correctamente</p>
     </div>
 
-    <button class="btn-guardar" onclick="guardarDatos()">Guardar y Continuar</button>
+    <button class="btn-guardar" onclick="guardarDatos()">Guardar Perfil</button>
     
-    <br>
     <button class="btn-volver" onclick="window.location.href='index.html'">
-        ← Volver al inicio
+        ← Regresar al inicio
     </button>
 </div>
 
@@ -187,22 +195,25 @@ function guardarDatos() {
 
     if (nombre.trim() === "" || !telRegex.test(telefono)) {
         if (errorTel) errorTel.style.display = !telRegex.test(telefono) ? "block" : "none";
-        alert("Por favor, completa los datos correctamente.");
         return;
     }
 
-    // 1. Guardamos localmente en el objeto original que ya tenías
+    // Guardar para sistema de Barbería (Consistente con los otros archivos)
+    localStorage.setItem('clienteNombre', nombre);
+    localStorage.setItem('clienteTelefono', "+598" + telefono);
+    
+    // También guardamos en el formato antiguo por si acaso
     const usuario = { nombre: nombre, telefono: "+598" + telefono };
     localStorage.setItem('clienteRichardTattoo', JSON.stringify(usuario));
 
-    // 2. IMPORTANTE: Guardamos llaves individuales para que revision.html las encuentre fácil
-    localStorage.setItem('clienteNombre', nombre);
-    localStorage.setItem('clienteTelefono', "+598" + telefono);
-
-    alert("¡Registro completado con éxito! Bienvenido, " + nombre);
+    // Feedback elegante
+    const btn = document.querySelector('.btn-guardar');
+    btn.innerText = "¡GUARDADO!";
+    btn.style.backgroundColor = "#2ecc71";
     
-    // 3. Redirigir al menú principal
-    window.location.href = "index.html";
+    setTimeout(() => {
+        window.location.href = "index.html";
+    }, 1000);
 }
 </script>
 
