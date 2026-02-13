@@ -3,102 +3,99 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>RichardTattoo | Tatuador profesional</title>
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;700&family=Montserrat:wght@200;300;400;600&family=Playfair+Display:ital,wght@0,400;1,400&display=swap" rel="stylesheet">
+    <title>MDLS STUDIO | Exclusive Barbering</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,500;0,700;1,400&family=Montserrat:wght@200;300;500&display=swap" rel="stylesheet">
     <style>
         :root {
-            --gold: #d4af37;
-            --gold-light: #f3e5ab;
-            --gold-gradient: linear-gradient(135deg, #ae8625 0%, #f7ef8a 50%, #d4af37 100%);
-            --white-accent: #ffffff;
-            --bg-deep: #050505;
-            --bg-gradient: radial-gradient(circle at center, #1a1a1a 0%, #000000 100%);
-            --card-glass: rgba(255, 255, 255, 0.02);
-            --border-subtle: rgba(255, 255, 255, 0.08);
-            --border-highlight: rgba(255, 255, 255, 0.3);
-            --text-main: #f5f5f5;
-            --text-secondary: #a0a0a0;
-            --transition: all 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+            --primary-white: #ffffff;
+            --soft-gray: #f9f9f9;
+            --accent-black: #111111;
+            --text-main: #222222;
+            --text-muted: #888888;
+            --border-light: rgba(0, 0, 0, 0.05);
+            --transition: all 0.6s cubic-bezier(0.23, 1, 0.32, 1);
         }
 
-        /* --- RESET & BASE --- */
         * { margin: 0; padding: 0; box-sizing: border-box; outline: none; -webkit-tap-highlight-color: transparent; }
-        html { scroll-behavior: smooth; font-size: 14px; }
+        html { scroll-behavior: smooth; font-size: 16px; }
 
         body {
             font-family: 'Montserrat', sans-serif;
-            background: var(--bg-deep);
-            background-image: var(--bg-gradient);
+            background-color: var(--primary-white);
             color: var(--text-main);
-            line-height: 1.6;
             overflow-x: hidden;
-            position: relative;
         }
 
-        /* --- CANVAS DE PARTÍCULAS --- */
         #particles-js {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
             z-index: 0;
             pointer-events: none;
-            filter: drop-shadow(0 0 8px rgba(212, 175, 55, 0.8));
+            opacity: 0.5;
         }
 
-        /* --- NAVBAR --- */
+        /* --- NAVBAR CON ICONOS --- */
         .navbar {
             position: fixed;
             top: 0; width: 100%;
-            background: rgba(5, 5, 5, 0.9);
-            backdrop-filter: blur(15px);
-            -webkit-backdrop-filter: blur(15px);
-            border-bottom: 1px solid var(--border-subtle);
-            padding: 10px 0;
+            padding: 20px 5%;
             z-index: 1000;
             display: flex;
-            flex-direction: column;
+            justify-content: space-between;
             align-items: center;
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(15px);
+            border-bottom: 1px solid var(--border-light);
         }
 
         .brand-logo {
-            font-family: 'Cinzel', serif;
-            color: var(--gold);
-            font-weight: 700;
-            letter-spacing: 2px;
-            font-size: 1.2rem;
-            margin-bottom: 5px;
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.6rem;
+            letter-spacing: 4px;
+            font-weight: 500;
+            color: var(--accent-black);
+            text-transform: uppercase;
+            text-decoration: none;
         }
 
-        .nav-links {
+        .nav-right {
             display: flex;
-            justify-content: center;
-            gap: 15px;
-            width: 100%;
-            overflow-x: auto;
-            padding: 5px 10px;
-            scrollbar-width: none;
+            align-items: center;
+            gap: 30px;
         }
-        
-        .nav-links::-webkit-scrollbar { display: none; }
+
+        .nav-links { display: flex; gap: 25px; }
+
+        .social-icons {
+            display: flex;
+            gap: 15px;
+            padding-left: 20px;
+            border-left: 1px solid var(--border-light);
+        }
+
+        .social-icons a {
+            fill: var(--text-muted);
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+        }
+
+        .social-icons a:hover { fill: var(--accent-black); transform: translateY(-2px); }
 
         .nav-item {
-            color: var(--text-secondary);
+            color: var(--text-muted);
             text-decoration: none;
-            font-size: 0.6rem;
+            font-size: 0.65rem;
             text-transform: uppercase;
-            letter-spacing: 1px;
-            font-weight: 600;
-            padding: 5px 8px;
-            white-space: nowrap;
-            border: 1px solid transparent;
+            letter-spacing: 2px;
             transition: var(--transition);
         }
 
-        .nav-item:hover, .nav-item:active {
-            color: var(--gold);
-            border-bottom: 1px solid var(--gold);
-        }
+        .nav-item:hover { color: var(--accent-black); }
 
-        .menu-toggle { display: none !important; }
+        @media (max-width: 850px) {
+            .nav-links { display: none; }
+        }
 
         /* --- HERO SECTION --- */
         .main-menu {
@@ -108,153 +105,98 @@
             justify-content: center;
             align-items: center;
             text-align: center;
-            padding: 100px 20px 60px;
-            position: relative;
-            z-index: 1;
+            padding: 0 20px;
+            background: radial-gradient(circle at center, #ffffff 0%, #f4f4f4 100%);
         }
 
         .logo-container {
-            width: 100px;
-            margin-bottom: 20px;
+            width: 140px;
+            margin-bottom: 30px;
+            filter: drop-shadow(0 10px 20px rgba(0,0,0,0.05));
         }
 
-        .logo-container img {
-            width: 100%;
-            filter: drop-shadow(0 0 15px rgba(212, 175, 55, 0.4));
-            animation: float 5s ease-in-out infinite;
-        }
-
-        @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
+        .logo-container img { width: 100%; }
 
         h1 {
-            font-family: 'Cinzel', serif;
-            font-size: clamp(2rem, 7vw, 4rem);
-            letter-spacing: 4px;
-            margin-bottom: 5px;
-            background: var(--gold-gradient);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(2.5rem, 8vw, 4.5rem);
+            font-weight: 300;
+            letter-spacing: 12px;
+            color: var(--accent-black);
+            margin-bottom: 10px;
             text-transform: uppercase;
         }
 
         .subtitle {
-            font-size: 0.65rem;
+            font-size: 0.8rem;
             text-transform: uppercase;
-            letter-spacing: 3px;
-            color: var(--white-accent);
-            margin-bottom: 40px;
-            opacity: 0.8;
+            letter-spacing: 6px;
+            color: var(--text-muted);
+            margin-bottom: 50px;
         }
 
         /* --- BOTONES --- */
         .btn-container {
             display: flex;
             flex-direction: column;
-            gap: 12px;
+            gap: 15px;
             width: 100%;
-            max-width: 260px;
+            max-width: 280px;
         }
 
         .btn {
-            background: transparent;
-            color: var(--gold);
-            border: 1px solid var(--gold);
-            padding: 15px 0;
+            background: var(--accent-black);
+            color: #fff;
+            border: 1px solid var(--accent-black);
+            padding: 18px 0;
             font-size: 0.7rem;
-            font-weight: 600;
+            font-weight: 500;
             text-transform: uppercase;
-            letter-spacing: 2px;
+            letter-spacing: 3px;
             cursor: pointer;
             transition: var(--transition);
+            text-decoration: none;
         }
 
         .btn:hover {
-            background: var(--white-accent);
-            color: #000;
+            background: transparent;
+            color: var(--accent-black);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.05);
         }
 
-        .btn-registro { border-color: rgba(255, 255, 255, 0.2); color: var(--text-secondary); }
+        .btn-registro { background: transparent; color: var(--text-muted); border-color: var(--border-light); }
 
         /* --- SECCIONES --- */
-        section {
-            max-width: 600px;
-            margin: 0 auto;
-            padding: 60px 20px;
-            text-align: center;
-            position: relative;
-            z-index: 1;
-        }
+        section { max-width: 800px; margin: 0 auto; padding: 100px 20px; text-align: center; }
 
-        h2 {
-            font-family: 'Cinzel', serif;
-            font-size: 1.6rem;
-            letter-spacing: 3px;
-            margin-bottom: 20px;
-            color: var(--white-accent);
-        }
+        h2 { font-family: 'Cormorant Garamond', serif; font-size: 2.2rem; font-weight: 300; margin-bottom: 40px; letter-spacing: 3px; }
 
-        .text-content {
-            font-family: 'Playfair Display', serif;
-            font-size: 1.1rem;
-            color: var(--text-secondary);
-            font-style: italic;
-            line-height: 1.6;
-        }
+        .info-box { background: #fff; padding: 40px; border: 1px solid var(--border-light); }
 
-        .info-box {
-            background: var(--card-glass);
-            border: 1px solid var(--border-subtle);
-            padding: 25px 15px;
-            border-radius: 4px;
-        }
+        .text-content { font-family: 'Cormorant Garamond', serif; font-size: 1.3rem; font-style: italic; line-height: 1.8; color: #444; }
 
-        .horarios-list li {
-            padding: 12px 0;
-            display: flex;
-            justify-content: space-between;
-            border-bottom: 1px solid var(--border-subtle);
-            font-size: 0.7rem;
-        }
+        .horarios-list li { padding: 15px 0; display: flex; justify-content: space-between; border-bottom: 1px solid var(--border-light); font-size: 0.75rem; letter-spacing: 1px; }
 
-        /* --- BOTÓN DE UBICACIÓN GRANDE --- */
+        /* --- UBICACIÓN --- */
         .location-btn-large {
             display: inline-block;
             width: 100%;
-            max-width: 300px;
             padding: 25px;
-            margin-top: 10px;
-            background: var(--card-glass);
-            border: 1px solid var(--gold);
-            color: var(--gold);
+            background: var(--accent-black);
+            color: #fff;
             text-decoration: none;
-            font-family: 'Cinzel', serif;
-            font-size: 1.2rem;
+            font-size: 0.75rem;
             letter-spacing: 4px;
             text-transform: uppercase;
             transition: var(--transition);
-            box-shadow: 0 0 15px rgba(212, 175, 55, 0.1);
         }
 
-        .location-btn-large:hover {
-            background: var(--gold);
-            color: #000;
-            box-shadow: 0 0 30px rgba(212, 175, 55, 0.4);
-            transform: translateY(-5px);
-        }
-
-        .address-text {
-            margin-top: 20px;
-            font-size: 0.7rem;
-            color: var(--text-secondary);
-            letter-spacing: 1px;
-            line-height: 1.8;
-        }
-
+        /* --- BOTÓN FLOTANTE --- */
         .btn-floating {
             position: fixed;
-            bottom: 20px; right: 20px;
+            bottom: 30px; right: 30px;
             width: 50px; height: 50px;
-            background: var(--white-accent);
+            background: var(--accent-black);
             border-radius: 50%;
             display: flex;
             justify-content: center;
@@ -263,22 +205,33 @@
             transition: var(--transition);
             transform: translateY(100px);
             opacity: 0;
+            border: none;
+            cursor: pointer;
         }
 
         .btn-floating.visible { transform: translateY(0); opacity: 1; }
-        .btn-floating svg { width: 20px; height: 20px; fill: #000; }
+        .btn-floating svg { width: 20px; height: 20px; fill: #fff; }
 
         footer {
-            padding: 40px 20px;
+            padding: 60px 20px;
             text-align: center;
-            font-size: 0.6rem;
-            letter-spacing: 3px;
-            color: #444;
-            border-top: 1px solid var(--border-subtle);
+            background: var(--soft-gray);
+            border-top: 1px solid var(--border-light);
         }
 
-        .reveal { opacity: 0; transform: translateY(20px); transition: 0.8s ease-out; }
+        .footer-social {
+            display: flex;
+            justify-content: center;
+            gap: 25px;
+            margin-bottom: 30px;
+        }
+
+        .footer-social a { fill: #bbb; transition: 0.3s; }
+        .footer-social a:hover { fill: var(--accent-black); }
+
+        .reveal { opacity: 0; transform: translateY(20px); transition: 1s ease; }
         .reveal.active { opacity: 1; transform: translateY(0); }
+
     </style>
 </head>
 <body>
@@ -286,12 +239,22 @@
     <div id="particles-js"></div>
 
     <nav class="navbar">
-        <div class="brand-logo">BRP</div>
-        <div class="nav-links">
-            <a href="#inicio" class="nav-item">Agendate</a>
-            <a href="#sobre-mi" class="nav-item">Sobre mi</a>
-            <a href="#horarios" class="nav-item">Horarios</a>
-            <a href="#ubicacion" class="nav-item">Ubicacion</a>
+        <a href="#" class="brand-logo">MDLS</a>
+        <div class="nav-right">
+            <div class="nav-links">
+                <a href="#inicio" class="nav-item">Inicio</a>
+                <a href="#sobre-mi" class="nav-item">Estudio</a>
+                <a href="#horarios" class="nav-item">Horarios</a>
+                <a href="#ubicacion" class="nav-item">Ubicación</a>
+            </div>
+            <div class="social-icons">
+                <a href="https://instagram.com/TU_USUARIO" target="_blank" title="Instagram">
+                    <svg width="18" height="18" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.791-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.209-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+                </a>
+                <a href="https://wa.me/59800000000" target="_blank" title="WhatsApp">
+                    <svg width="18" height="18" viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/></svg>
+                </a>
+            </div>
         </div>
     </nav>
 
@@ -301,70 +264,60 @@
 
     <div class="main-menu" id="inicio">
         <div class="logo-container reveal active">
-            <img src="logo.png" alt="Richard Tattoo Logo" onerror="this.src='https://via.placeholder.com/100x100/000/d4af37?text=RT'">
+            <img src="logo.png" alt="MDLS Studio Logo" onerror="this.src='https://via.placeholder.com/150/ffffff/000000?text=MDLS'">
         </div>
-        <h1 class="reveal active">Richard Tattoo</h1>
-        <div class="subtitle reveal active">Tatuador profesional</div>
+        <h1 class="reveal active">MDLS STUDIO</h1>
+        <div class="subtitle reveal active">The Art of Modern Grooming</div>
         
         <div class="btn-container reveal active">
-            <button id="mainBookingBtn" class="btn" onclick="verificarYAgendar()">Reservar Sesión</button>
-            <button class="btn btn-registro" onclick="window.location.href='registro.html'">Acceso Clientes</button>
+            <button id="mainBookingBtn" class="btn" onclick="verificarYAgendar()">Agendar Cita</button>
+            <button class="btn btn-registro" onclick="window.location.href='registro.html'">Mi Perfil</button>
         </div>
     </div>
 
     <section id="sobre-mi" class="reveal">
-        <h2>Sobre mi</h2>
-        <p class="text-content">"Trabajo hace mas de 15 años en este ambito, de forma profesional."</p>
+        <h2>El Estudio</h2>
+        <div class="info-box">
+            <p class="text-content">"Creamos una estética atemporal para el hombre moderno. En MDLS, cada corte es una obra de precisión realizada en un ambiente de calma y exclusividad."</p>
+        </div>
     </section>
 
     <section id="horarios" class="reveal">
         <h2>Horarios</h2>
         <div class="info-box">
             <ul class="horarios-list" style="list-style: none;">
-                <li><span>LUNES</span> <span>09:00 — 21:00</span></li>
-                <li><span>MARTES</span> <span>09:00 — 21:00</span></li>
-                <li><span>MIÉRCOLES</span> <span>09:00 — 21:00</span></li>
-                <li><span>JUEVES</span> <span>09:00 — 21:00</span></li>
-                <li><span>VIERNES</span> <span>09:00 — 21:00</span></li>
-                <li><span>SÁBADO</span> <span>09:00 — 21:00</span></li>
-                <li style="color: #444; border: none;"><span>DOMINGO</span> <span>Cerrado</span></li>
+                <li><span>LUNES — VIERNES</span> <span>09:00 — 21:00</span></li>
+                <li><span>SÁBADO</span> <span>09:00 — 18:00</span></li>
+                <li style="border: none; opacity: 0.3;"><span>DOMINGO</span> <span>Cerrado</span></li>
             </ul>
         </div>
     </section>
 
     <section id="ubicacion" class="reveal">
-        <h2>Ubicacion</h2>
-        <p style="color: var(--gold); font-size: 0.7rem; letter-spacing: 2px; margin-bottom: 30px;">ARTIGAS, URUGUAY</p>
-        
-        <a href="https://www.google.com/maps/search/?api=1&query=Richard+Tattoo+Artigas+HGFM%2B9H8" target="_blank" class="location-btn-large">
-            Ver Ubicación
-        </a>
-
-        <div class="address-text">
-            <p><strong>DIRECCIÓN EXACTA:</strong></p>
-            <p>HGFM+9H8 Richard Tattoo, C. 2</p>
-            <p>55000 Artigas, Departamento de Artigas</p>
-        </div>
+        <h2>Ubicación</h2>
+        <p style="letter-spacing: 5px; font-size: 0.7rem; margin-bottom: 40px;">ARTIGAS, URUGUAY</p>
+        <a href="https://maps.google.com/?q=HGFM+9H8+Artigas" target="_blank" class="location-btn-large">Ver Mapa Interactivo</a>
     </section>
 
     <footer>
-        © 2026 RICHARD TATTOO STUDIO | BRP | Braian Pereira <br>✦
+        <div class="footer-social">
+             <a href="https://instagram.com/TU_USUARIO" target="_blank"><svg width="24" height="24" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259 0 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.791-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.209-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg></a>
+             <a href="https://wa.me/59800000000" target="_blank"><svg width="24" height="24" viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/></svg></a>
+        </div>
+        MDLS STUDIO © 2026 | EXCLUSIVE GROOMING
     </footer>
 
     <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
     <script>
         particlesJS("particles-js", {
             "particles": {
-                "number": { "value": 120, "density": { "enable": true, "value_area": 800 } },
-                "color": { "value": "#d4af37" },
+                "number": { "value": 40, "density": { "enable": true, "value_area": 800 } },
+                "color": { "value": "#000000" },
                 "shape": { "type": "circle" },
-                "opacity": { "value": 0.8, "random": true },
-                "size": { "value": 3, "random": true },
-                "line_linked": { "enable": false },
-                "move": { "enable": true, "speed": 1.5, "direction": "top", "random": true, "out_mode": "out" }
-            },
-            "interactivity": { "events": { "onhover": { "enable": false } } },
-            "retina_detect": true
+                "opacity": { "value": 0.1 },
+                "size": { "value": 1.5 },
+                "move": { "enable": true, "speed": 0.4 }
+            }
         });
 
         function verificarYAgendar() {
@@ -372,7 +325,7 @@
             if (clienteGuardado) { 
                 window.location.href = 'agenda.html'; 
             } else { 
-                alert("Para acceder a la agenda exclusiva, por favor complete su registro."); 
+                alert("Para agendar su cita en MDLS Studio, es necesario estar registrado."); 
                 window.location.href = 'registro.html'; 
             }
         }

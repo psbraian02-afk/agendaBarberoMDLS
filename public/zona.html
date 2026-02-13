@@ -3,85 +3,106 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Servicios | RichardBarber</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700&family=Playfair+Display:ital,wght@0,400;1,700&display=swap" rel="stylesheet">
+    <title>Servicios | MDLS STUDIO</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,500;0,700;1,400&family=Montserrat:wght@200;300;500;700&display=swap" rel="stylesheet">
     <style>
+        /* Configuración de Lujo MDLS STUDIO - WHITE LABEL */
         :root {
-            --gold: #f1c40f;
-            --gold-soft: rgba(241, 196, 15, 0.1);
-            --bg: #0a0a0a;
-            --card: #141414;
-            --text-main: #ffffff;
-            --text-dim: #a0a0a0;
-            --transition: all 0.2s ease;
+            --accent: #000000;
+            --accent-soft: rgba(0, 0, 0, 0.05);
+            --bg: #ffffff;
+            --card: #fcfcfc;
+            --text-main: #111111;
+            --text-dim: #666666;
+            --border: rgba(0, 0, 0, 0.08);
+            --transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
         }
 
         body {
             margin: 0;
-            font-family: 'Inter', sans-serif;
+            font-family: 'Montserrat', sans-serif;
             background-color: var(--bg);
+            background-image: radial-gradient(circle at center, #ffffff 0%, #f0f0f0 100%);
             color: var(--text-main);
             display: flex;
             justify-content: center;
             align-items: center;
             height: 100vh;
             overflow: hidden;
-            background-image: radial-gradient(circle at center, #111 0%, #0a0a0a 100%);
         }
 
         .container {
             background-color: var(--card);
-            padding: 15px 15px;
-            border-radius: 4px;
+            padding: 40px 25px;
+            border-radius: 0px;
             width: 92%;
             max-width: 420px;
-            max-height: 95vh;
+            max-height: 90vh;
             text-align: center;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.8);
-            border: 1px solid rgba(255, 255, 255, 0.05);
+            box-shadow: 0 30px 60px rgba(0,0,0,0.1);
+            border: 1px solid var(--border);
             display: flex;
             flex-direction: column;
+            position: relative;
+            animation: fadeIn 0.8s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Línea superior minimalista característica */
+        .container::after {
+            content: '';
+            position: absolute;
+            top: 0; left: 20%; right: 20%; height: 1px;
+            background: linear-gradient(90deg, transparent, var(--accent), transparent);
         }
 
         h2 { 
-            font-family: 'Playfair Display', serif;
-            color: var(--gold); 
+            font-family: 'Cormorant Garamond', serif;
+            color: var(--text-main); 
             text-transform: uppercase; 
-            font-size: 1.2rem; 
-            margin: 0 0 15px 0; 
-            letter-spacing: 2px;
+            font-size: 1.8rem; 
+            margin: 0 0 30px 0; 
+            letter-spacing: 6px;
+            font-weight: 300;
         }
 
         .lista-servicios {
             flex: 1;
             display: flex;
             flex-direction: column;
-            gap: 8px;
+            gap: 12px;
             overflow-y: auto;
-            padding-right: 5px;
-            margin-bottom: 10px;
+            padding: 5px 10px 5px 0;
+            margin-bottom: 20px;
         }
 
+        /* Tarjeta de servicio estilizada */
         .servicio-card {
-            background: #1a1a1a;
-            border: 1px solid #222;
-            padding: 8px;
-            border-radius: 6px;
+            background: #ffffff;
+            border: 1px solid var(--border);
+            padding: 12px;
+            border-radius: 0px; /* Estética angular más lujosa */
             display: flex;
             align-items: center;
             cursor: pointer;
             transition: var(--transition);
-            min-height: 70px;
+            min-height: 80px;
+            position: relative;
         }
 
         .servicio-img {
-            width: 60px;
-            height: 60px;
-            border-radius: 4px;
+            width: 65px;
+            height: 65px;
+            border-radius: 0px;
             object-fit: cover;
-            margin-right: 12px;
-            filter: grayscale(0.5);
+            margin-right: 15px;
+            filter: grayscale(1);
             transition: var(--transition);
+            border: 1px solid var(--border);
         }
 
         .servicio-info {
@@ -91,93 +112,116 @@
 
         .servicio-nombre {
             display: block;
-            font-weight: 700;
+            font-weight: 500;
             font-size: 0.85rem;
             color: var(--text-main);
-            line-height: 1.1;
-        }
-
-        .servicio-meta {
-            font-size: 0.75rem;
-            color: var(--gold);
-            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 3px;
         }
 
         .servicio-desc {
             font-size: 0.7rem;
-            color: #777;
+            color: var(--text-dim);
             display: block;
-            line-height: 1.2;
+            line-height: 1.4;
+            font-weight: 300;
+        }
+
+        .servicio-meta {
+            display: block;
+            font-size: 0.65rem;
+            color: #999;
+            margin-top: 5px;
+            letter-spacing: 1px;
         }
 
         .servicio-precio {
             font-weight: 700;
-            font-size: 0.85rem;
+            font-size: 0.9rem;
             color: var(--text-main);
             margin-left: 10px;
-            white-space: nowrap;
+            font-family: 'Cormorant Garamond', serif;
         }
 
         .add-btn {
-            width: 28px;
-            height: 28px;
-            border-radius: 50%;
-            border: 1px solid #444;
+            width: 24px;
+            height: 24px;
+            border: 1px solid var(--border);
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1rem;
-            margin-left: 10px;
+            font-size: 0.8rem;
+            margin-left: 12px;
             transition: var(--transition);
+            color: #ccc;
+        }
+
+        /* Estados de selección */
+        .servicio-card:hover {
+            border-color: var(--accent);
+            background: var(--accent-soft);
         }
 
         .servicio-card.selected {
-            border-color: var(--gold);
-            background: var(--gold-soft);
+            border-color: var(--accent);
+            background: #fdfdfd;
+            box-shadow: inset 4px 0 0 0 var(--accent);
         }
 
-        .servicio-card.selected .servicio-img { filter: grayscale(0); }
-
+        .servicio-card.selected .servicio-img { filter: grayscale(0); border-color: var(--accent); }
         .servicio-card.selected .add-btn {
-            background: var(--gold);
-            border-color: var(--gold);
-            color: #000;
+            background: var(--accent);
+            border-color: var(--accent);
+            color: #ffffff;
             transform: rotate(45deg);
         }
 
+        /* Botón Confirmar Elegante */
         .btn-confirmar {
             width: 100%;
-            background-color: var(--gold);
-            color: #000;
+            background-color: var(--accent);
+            color: #ffffff;
             border: none;
-            padding: 14px;
-            font-size: 0.85rem;
+            padding: 16px;
+            font-size: 0.75rem;
             font-weight: 700;
             text-transform: uppercase;
-            letter-spacing: 2px;
-            border-radius: 4px;
+            letter-spacing: 3px;
             cursor: pointer;
-            display: none;
+            transition: var(--transition);
+            margin-bottom: 10px;
+            animation: fadeInUp 0.5s ease-out;
+        }
+
+        .btn-confirmar:hover {
+            background-color: #333;
+            letter-spacing: 4px;
         }
 
         .btn-back {
             background: none;
             border: none;
-            color: #666;
-            padding: 8px;
+            color: #999;
+            padding: 10px;
             cursor: pointer;
-            font-size: 0.7rem;
+            font-size: 0.65rem;
             text-transform: uppercase;
+            letter-spacing: 2px;
+            transition: var(--transition);
+            font-family: 'Montserrat', sans-serif;
         }
 
-        .lista-servicios::-webkit-scrollbar { width: 3px; }
-        .lista-servicios::-webkit-scrollbar-thumb { background: var(--gold); }
+        .btn-back:hover { color: var(--text-main); }
 
-        .container::after {
-            content: '';
-            position: absolute;
-            top: 0; left: 0; right: 0; height: 1px;
-            background: linear-gradient(90deg, transparent, var(--gold), transparent);
+        /* Scrollbar minimalista */
+        .lista-servicios::-webkit-scrollbar { width: 2px; }
+        .lista-servicios::-webkit-scrollbar-thumb { background: #eee; }
+        .lista-servicios::-webkit-scrollbar-thumb:hover { background: var(--accent); }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
         }
     </style>
 </head>
@@ -190,11 +234,11 @@
         <div class="servicio-card" onclick="toggleServicio(this, 'Combo Premium', 1100)">
             <img src="https://images.unsplash.com/photo-1503951914875-452162b0f3f1?q=80&w=150&h=150&auto=format&fit=crop" class="servicio-img">
             <div class="servicio-info">
-                <span class="servicio-nombre">Próximamente</span>
+                <span class="servicio-nombre">Combo Premium</span>
                 <span class="servicio-desc">Corte + Barboterapia + Lavado</span>
-                <span class="servicio-meta">1 h</span>
+                <span class="servicio-meta">DURACIÓN: 60 MIN</span>
             </div>
-            <span class="servicio-precio">1100</span>
+            <span class="servicio-precio">$1100</span>
             <div class="add-btn">+</div>
         </div>
 
@@ -202,10 +246,10 @@
             <img src="https://images.unsplash.com/photo-1621605815841-aa897bd07b44?q=80&w=150&h=150&auto=format&fit=crop" class="servicio-img">
             <div class="servicio-info">
                 <span class="servicio-nombre">Corte de cabello</span>
-                <span class="servicio-desc">Tijera o máquina</span>
-                <span class="servicio-meta">30 min</span>
+                <span class="servicio-desc">Tijera o máquina técnica</span>
+                <span class="servicio-meta">DURACIÓN: 30 MIN</span>
             </div>
-            <span class="servicio-precio">750</span>
+            <span class="servicio-precio">$750</span>
             <div class="add-btn">+</div>
         </div>
 
@@ -213,21 +257,21 @@
             <img src="https://images.unsplash.com/photo-1599351431202-1e0f0137899a?q=80&w=150&h=150&auto=format&fit=crop" class="servicio-img">
             <div class="servicio-info">
                 <span class="servicio-nombre">Corte + Barba</span>
-                <span class="servicio-desc">Perfilado completo</span>
-                <span class="servicio-meta">40 min</span>
+                <span class="servicio-desc">Perfilado y diseño completo</span>
+                <span class="servicio-meta">DURACIÓN: 45 MIN</span>
             </div>
-            <span class="servicio-precio">900</span>
+            <span class="servicio-precio">$900</span>
             <div class="add-btn">+</div>
         </div>
 
-        <div class="servicio-card" onclick="toggleServicio(this, 'Corte + Barba + Cejas', 1000)">
+        <div class="servicio-card" onclick="toggleServicio(this, 'Combo Completo', 1000)">
             <img src="https://images.unsplash.com/photo-1512690196236-d2003322199b?q=80&w=150&h=150&auto=format&fit=crop" class="servicio-img">
             <div class="servicio-info">
                 <span class="servicio-nombre">Combo Completo</span>
                 <span class="servicio-desc">Pelo, barba y cejas</span>
-                <span class="servicio-meta">40 min</span>
+                <span class="servicio-meta">DURACIÓN: 45 MIN</span>
             </div>
-            <span class="servicio-precio">1000</span>
+            <span class="servicio-precio">$1000</span>
             <div class="add-btn">+</div>
         </div>
 
@@ -235,10 +279,10 @@
             <img src="https://images.unsplash.com/photo-1532710093739-9470acff878f?q=80&w=150&h=150&auto=format&fit=crop" class="servicio-img">
             <div class="servicio-info">
                 <span class="servicio-nombre">Barba Express</span>
-                <span class="servicio-desc">Mantenimiento rápido</span>
-                <span class="servicio-meta">15 min</span>
+                <span class="servicio-desc">Mantenimiento y limpieza rápida</span>
+                <span class="servicio-meta">DURACIÓN: 15 MIN</span>
             </div>
-            <span class="servicio-precio">500</span>
+            <span class="servicio-precio">$500</span>
             <div class="add-btn">+</div>
         </div>
 
@@ -246,16 +290,16 @@
             <img src="https://images.unsplash.com/photo-1493106819501-66d381c466f1?q=80&w=150&h=150&auto=format&fit=crop" class="servicio-img">
             <div class="servicio-info">
                 <span class="servicio-nombre">Cejas</span>
-                <span class="servicio-desc">Perfilado con navaja</span>
-                <span class="servicio-meta">15 min</span>
+                <span class="servicio-desc">Perfilado detallado con navaja</span>
+                <span class="servicio-meta">DURACIÓN: 15 MIN</span>
             </div>
-            <span class="servicio-precio">200</span>
+            <span class="servicio-precio">$200</span>
             <div class="add-btn">+</div>
         </div>
     </div>
 
-    <button id="confirmar" class="btn-confirmar" onclick="guardarYContinuar()">Confirmar Selección</button>
-    <button class="btn-back" onclick="window.location.href='agenda.html'">← Volver</button>
+    <button id="confirmar" class="btn-confirmar" style="display: none;" onclick="guardarYContinuar()">Confirmar Selección</button>
+    <button class="btn-back" onclick="window.location.href='agenda.html'">← Volver a la agenda</button>
 </div>
 
 <script>
@@ -277,7 +321,7 @@
         const btn = document.getElementById('confirmar');
         if (serviciosSeleccionados.length > 0) {
             btn.style.display = 'block';
-            btn.innerText = `CONFIRMAR (${totalPrecio} UYU)`;
+            btn.innerText = `CONFIRMAR ($${totalPrecio} UYU)`;
         } else {
             btn.style.display = 'none';
         }
@@ -293,8 +337,12 @@
             const mesesNombres = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"];
             const mesIndex = mesesNombres.indexOf(citaActual.mes);
             
-            const fechaInicio = new Date(año, mesIndex, citaActual.dia, parseInt(citaActual.horaInicio), 0, 0);
-            const fechaFin = new Date(año, mesIndex, citaActual.dia, parseInt(citaActual.horaFin), 0, 0);
+            // Lógica para formatear fechas si fuera necesario
+            const horaInicioRaw = parseInt(citaActual.horaInicio) || 0;
+            const horaFinRaw = parseInt(citaActual.horaFin) || 0;
+
+            const fechaInicio = new Date(año, mesIndex, citaActual.dia, horaInicioRaw, 0, 0);
+            const fechaFin = new Date(año, mesIndex, citaActual.dia, horaFinRaw, 0, 0);
 
             citaActual.googleStart = fechaInicio.toISOString();
             citaActual.googleEnd = fechaFin.toISOString();

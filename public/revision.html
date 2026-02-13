@@ -3,137 +3,154 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Revisar Cita - RichardBarber</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700&family=Playfair+Display:ital,wght@0,400;1,700&display=swap" rel="stylesheet">
+    <title>Revisar Cita | MDLS STUDIO</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,500;0,700;1,400&family=Montserrat:wght@200;300;500;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --gold: #f1c40f;
-            --bg: #0a0a0a;
-            --card: #141414;
-            --text-main: #ffffff;
-            --text-dim: #a0a0a0;
-            --transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            --accent: #000000;
+            --bg: #ffffff;
+            --card: #fcfcfc;
+            --text-main: #111111;
+            --text-dim: #666666;
+            --border: rgba(0, 0, 0, 0.08);
+            --transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
         }
 
         body {
             margin: 0;
-            font-family: 'Inter', sans-serif;
+            font-family: 'Montserrat', sans-serif;
             background-color: var(--bg);
+            background-image: radial-gradient(circle at center, #ffffff 0%, #f0f0f0 100%);
             color: var(--text-main);
             display: flex;
             justify-content: center;
             align-items: center;
             min-height: 100vh;
-            background-image: radial-gradient(circle at center, #111 0%, #0a0a0a 100%);
+            overflow: hidden;
         }
 
         .container {
             background-color: var(--card);
-            padding: 30px 25px;
-            border-radius: 2px;
+            padding: 50px 30px;
+            border-radius: 0px;
             width: 90%;
             max-width: 400px;
             text-align: center;
-            box-shadow: 0 30px 60px rgba(0,0,0,0.8);
-            border: 1px solid rgba(255,255,255,0.05);
+            box-shadow: 0 30px 60px rgba(0,0,0,0.08);
+            border: 1px solid var(--border);
             position: relative;
+            animation: fadeIn 0.8s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Línea superior minimalista */
+        .container::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 20%; right: 20%; height: 1px;
+            background: linear-gradient(90deg, transparent, var(--accent), transparent);
         }
 
         h2 { 
-            font-family: 'Playfair Display', serif;
-            color: var(--gold); 
+            font-family: 'Cormorant Garamond', serif;
+            color: var(--text-main); 
             text-transform: uppercase; 
-            font-size: 1.5rem; 
-            margin-bottom: 25px; 
-            letter-spacing: 3px;
+            font-size: 1.8rem; 
+            margin-bottom: 35px; 
+            letter-spacing: 6px;
+            font-weight: 300;
         }
 
         .resumen {
             text-align: left;
-            background: #0d0d0d;
-            padding: 20px;
-            border-radius: 2px;
-            margin-bottom: 25px;
-            border-left: 3px solid var(--gold);
-            border: 1px solid #222;
+            background: #ffffff;
+            padding: 25px;
+            border-radius: 0px;
+            margin-bottom: 35px;
+            border: 1px solid var(--border);
+            position: relative;
         }
 
         .resumen p { 
-            margin: 12px 0; 
-            font-size: 0.85rem; 
+            margin: 15px 0; 
+            font-size: 0.75rem; 
             color: var(--text-dim); 
             text-transform: uppercase;
-            letter-spacing: 1px;
+            letter-spacing: 1.5px;
             display: flex;
             justify-content: space-between;
-            gap: 10px;
+            align-items: flex-start;
+            gap: 15px;
+            border-bottom: 1px solid rgba(0,0,0,0.03);
+            padding-bottom: 8px;
         }
+
+        .resumen p:last-child { border-bottom: none; }
 
         .resumen b { 
             color: var(--text-main); 
-            font-weight: 700;
+            font-weight: 600;
             text-align: right;
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 0.95rem;
         }
 
         /* Ocultando notas y fotos según lo solicitado */
-        .upload-area {
-            display: none;
-        }
+        .upload-area { display: none; }
 
         .btn-final {
             width: 100%;
-            background-color: var(--gold);
-            color: #000;
+            background-color: var(--accent);
+            color: #ffffff;
             border: none;
             padding: 18px;
             font-weight: 700;
             text-transform: uppercase;
-            letter-spacing: 2px;
-            border-radius: 2px;
+            letter-spacing: 3px;
             cursor: pointer;
-            font-size: 0.9rem;
+            font-size: 0.8rem;
             transition: var(--transition);
         }
 
         .btn-final:hover:not(:disabled) {
-            background-color: #fff;
-            transform: translateY(-2px);
+            background-color: #333;
+            letter-spacing: 4px;
         }
 
         .btn-final:disabled { 
-            background-color: #333; 
-            color: #666;
+            background-color: #eee; 
+            color: #aaa;
             cursor: not-allowed; 
         }
 
         .btn-back {
             background: none;
-            border: 1px solid #333;
-            color: #666;
-            padding: 10px 20px;
-            border-radius: 2px;
+            border: none;
+            color: #999;
+            padding: 15px;
             cursor: pointer;
-            margin-top: 15px;
-            font-size: 0.75rem;
+            margin-top: 20px;
+            font-size: 0.65rem;
             text-transform: uppercase;
             letter-spacing: 2px;
             transition: var(--transition);
         }
 
+        .btn-back:hover { color: var(--text-main); }
+
         .hidden { display: none; }
 
         #mensaje-status { 
             margin-top: 20px; 
-            font-size: 0.8rem; 
+            font-size: 0.7rem; 
             letter-spacing: 1px;
             min-height: 1.2em;
-        }
-
-        .container::before {
-            content: '';
-            position: absolute;
-            top: 0; left: 0; width: 100%; height: 1px;
-            background: linear-gradient(90deg, transparent, var(--gold), transparent);
+            text-transform: uppercase;
+            font-weight: 500;
         }
     </style>
 </head>
@@ -153,10 +170,11 @@
     
     <div id="mensaje-status"></div>
 
-    <button id="btn-atras" class="btn-back" onclick="window.location.href='servicios.html'">← Cambiar Servicios</button>
+    <button id="btn-atras" class="btn-back" onclick="window.location.href='servicios.html'">← Volver a Servicios</button>
 </div>
 
 <script>
+    // MANTENEMOS TODA LA LÓGICA ORIGINAL SIN ELIMINAR NADA
     const cita = JSON.parse(localStorage.getItem('citaRichardTattoo'));
 
     if (!cita) {
@@ -165,24 +183,22 @@
     }
 
     document.getElementById('detalle-cita').innerHTML = `
-        <p>📅 Fecha: <b>${cita.fechaFormateada || (cita.dia + ' de ' + cita.mes)}</b></p>
-        <p>⏰ Horario: <b>${cita.horaInicio} a ${cita.horaFin}</b></p>
-        <p>✂️ Servicios: <b>${cita.servicios || 'No seleccionado'}</b></p>
-        <p>💰 Total: <b>${cita.precioTotal || '0'} UYU</b></p>
+        <p>Fecha <b>${cita.fechaFormateada || (cita.dia + ' de ' + cita.mes)}</b></p>
+        <p>Horario <b>${cita.horaInicio} a ${cita.horaFin}</b></p>
+        <p>Servicios <b>${cita.servicios || 'No seleccionado'}</b></p>
+        <p>Inversión <b>$${cita.precioTotal || '0'} UYU</b></p>
     `;
 
     async function enviarCita() {
         const btn = document.getElementById('btn-enviar');
         const btnAtras = document.getElementById('btn-atras');
         const status = document.getElementById('mensaje-status');
-        const fileInput = document.getElementById('foto-referencia');
-        const detallesInput = document.getElementById('detalles-tatuaje');
         
         btn.disabled = true;
         btnAtras.classList.add('hidden');
 
-        status.style.color = "#f1c40f";
-        status.innerText = "Agendando tu lugar, espera un momento...";
+        status.style.color = "#111";
+        status.innerText = "Sincronizando con la agenda...";
 
         const clienteNombre = localStorage.getItem('clienteNombre') || "No registrado";
         const clienteApellido = localStorage.getItem('clienteApellido') || "";
@@ -195,7 +211,6 @@
         formData.append('horario', `${cita.horaInicio} a ${cita.horaFin}`);
         formData.append('servicios', cita.servicios);
         formData.append('precio', cita.precioTotal);
-        // Enviamos vacíos pero mantenemos la estructura
         formData.append('notas', ""); 
 
         try {
@@ -224,8 +239,8 @@
                 body: dataAPI
             }).catch(() => console.log("Calendario offline"));
 
-            status.style.color = "#2ecc71";
-            status.innerText = "¡Cita agendada con éxito! Redirigiendo...";
+            status.style.color = "#111";
+            status.innerText = "¡Cita confirmada! Redirigiendo...";
             
             localStorage.removeItem('citaRichardTattoo');
             
@@ -235,8 +250,8 @@
 
         } catch (error) {
             console.error("Error crítico:", error);
-            status.style.color = "#e74c3c";
-            status.innerText = "Error al conectar. Reintenta.";
+            status.style.color = "#ff0000";
+            status.innerText = "Error de conexión. Intenta de nuevo.";
             btn.disabled = false;
             btnAtras.classList.remove('hidden');
         }
